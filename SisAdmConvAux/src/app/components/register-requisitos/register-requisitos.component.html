@@ -1,0 +1,64 @@
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+     initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<form class="label-form" style="width:100%;" [formGroup]="form">
+  <br>
+  <h3 class="container text-center">REQUISITOS</h3>
+  <hr>
+  <!-- X -->
+  <div formArrayName="requests">
+    <div *ngFor="let X of form['controls'].requests['controls']; let ix=index">
+      <div formGroupName="{{ix}}" class="Xs">
+          <b>REQUISITO N° {{ix+1}}</b>
+        <div class="form-group row">
+          <div class="col-md-11">
+            <textarea type="text" class="form-control" formControlName="requisito"  [ngClass]="{'form-control': true,
+            'is-invalid': X.controls.requisito.invalid && X.controls.requisito.touched,
+            'is-valid': X.controls.requisito.valid}"></textarea>
+            <small *ngIf="X.controls.requisito.errors?.required && X.controls.requisito.touched" class="form-text custom-invalid-feedback">Ingrese un requisito o elimine el campo</small>
+            <small *ngIf="X.controls.requisito.errors?.maxlength && X.controls.requisito.touched" class="form-text custom-invalid-feedback">Ingrese 2000 caracteres como máximo</small>
+            <small *ngIf="X.controls.requisito.errors?.minlength && X.controls.requisito.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+          </div>
+          <div class="col-md-1">
+            <button class="btn btn-danger" (click)="removeX(ix)"><i class="fa fa-trash"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-sm btn-primary" (click)="addX()">Añadir Requisito</button>
+  </div>
+      <!-- X End -->
+  <div formArrayName="notes">
+  <div *ngFor="let Y of form['controls'].notes['controls']; let iy=index">
+    <div formGroupName="{{iy}}">
+        <b>Nota</b>
+      <div class="form-group row">
+        <div class="col-md-11">
+          <textarea type="text" class="form-control" formControlName="note"  [ngClass]="{'form-control': true,
+          'is-invalid': Y.controls.note.invalid && Y.controls.note.touched,
+          'is-valid': Y.controls.note.valid}"></textarea>
+          <small *ngIf="Y.controls.note.errors?.required && Y.controls.note.touched" class="form-text custom-invalid-feedback">Ingrese una nota o elimine el campo</small>
+          <small *ngIf="Y.controls.note.errors?.maxlength && Y.controls.note.touched" class="form-text custom-invalid-feedback">Ingrese 2000 caracteres como máximo</small>
+          <small *ngIf="Y.controls.note.errors?.minlength && Y.controls.note.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-danger" (click)="removeY(iy)"><i class="fa fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--<button class="btn btn-sm btn-primary" (click)="addY()">Añadir nota</button>-->
+</div>
+  <br>
+  <div class="form-row">
+    <div class="col-md-6">
+      <button class="btn btn-sm btn-danger btn-lg btn-block " type="submit" (click)="cancel()">Cancelar</button>
+    </div>
+    <div class="col-md-6">
+      <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (click)="save()" [disabled]="!form.valid">Guardar</button>
+    </div>
+  </div>
+</form>
+

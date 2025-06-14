@@ -1,0 +1,75 @@
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+   initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<form class="label-form" style="width:100%;" [formGroup]="form">
+  <h3 class="container text-center">CALIFICACIÓN DE MÉRITOS</h3>
+  <hr>
+  <b>Convocatoria: </b> <label>{{announcement.title}}</label>
+  <div class="form-row">
+    <div class="col-md-8">
+      <b>Postulante: </b> <label>{{currentPerson.name}} {{currentPerson.lastName}}</label>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6">
+      <b>Puntaje base:  </b> <label>{{merit.baseScore}} puntos</label>
+    </div>
+    <div class="col-md-6">
+      <b>Porcentaje sobre nota final:  </b> <label>{{merit.finalScore}} %</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <div formArrayName="scores">
+      <div *ngFor="let X of form['controls'].scores['controls']; let ix=index" [formGroupName]="ix">
+          <hr>
+          <div class="form-group row">
+            <div class="col-md-8">
+              <b class="field-name" [attr.for]="'score' + ix">{{subDetails[ix].description}}</b>
+            </div>
+            <div class="col-md-1">
+              <b>Puntos</b>
+            </div>
+            <div class="col-md-2">
+              <input type="text" class="form-control" formControlName="score"  [ngClass]="{'form-control': true,
+              'is-invalid': X.controls.score.invalid && X.controls.score.touched,
+              'is-valid': X.controls.score.valid}">
+              <small *ngIf="X.controls.score.errors?.required && X.controls.score.touched" class="form-text custom-invalid-feedback">Los puntos son requeridos</small>
+              <small *ngIf="X.controls.score.errors?.pattern && X.controls.score.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+              <small *ngIf="X.controls.score.errors?.maxlength && X.controls.score.touched" class="form-text custom-invalid-feedback">Ingrese 5 caracteres como máximo</small>
+            </div>
+            <div class="col-md-1">
+              <div class="col-md-1"><b>/{{subDetails[ix].percentage}}</b></div>
+            </div>
+          </div>
+          <div formArrayName="subsubscores">
+            <div *ngFor="let Y of X['controls'].subsubscores['controls']; let iy=index" [formGroupName]="iy" class="Xs">
+              <div *ngFor="let subd of subdetails; let z = index ">
+                <div *ngFor="let item of subdetails[z]">
+                  <div *ngIf="item.subdetailMerit.idsubdetailmerit === subDetails[ix].idsubdetailmerit">
+                    <div class="form-group row">
+                      <div class="col-md-11">
+                        <label> - {{item.description}}</label>
+                      </div>
+                      <div class="col-md-1">
+                        <label>/{{item.percentage}}</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6">
+     <button class="btn btn-sm btn-danger btn-lg btn-block " type="submit" [routerLink]="['/merito/habilitados']" routerLinkActive="router-link-active">Atrás</button>
+    </div>
+    <div class="col-md-6">
+      <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (click)="save()">Guardar</button>
+    </div>
+  </div>
+</form>

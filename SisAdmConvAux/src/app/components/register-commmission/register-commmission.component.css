@@ -1,0 +1,65 @@
+.register {
+    display: grid;
+    grid-column: 2;
+  }
+  .register-container {
+    position: relative;
+    left: 5%;
+    right: 50%;
+    width: 90%;
+    border: 0px;
+  }
+  
+  .greeting-title {
+  color: #003770;
+  font-size: 50px;
+  text-align:center;
+  grid-column-start: 1;
+  grid-column-end: -1;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  }
+  
+  .register {
+    width: 100%;
+    margin: auto;
+    padding: 1% 1% 1% 2%;
+  }
+  .user-form {
+    align-items: center;
+    padding-bottom: 2%;
+  }
+  .labels {
+    color: #003770;
+    font-size: 25px;
+  }
+  .form-check{
+  color: #003770;
+  font-size: 25px;
+  }
+  .btn-save {
+  border: #003770;
+  border-radius: 3px;
+  background-color: #003770;
+  color: aliceblue;
+  font-size: 20px;
+  padding: 5px;
+  top: 50%;
+  width: 470px;
+  position: absolute;
+  transform: translate(0%, 0%);
+  }
+  .btn-cancel {
+  border: #ef1c25;
+  border-radius: 3px;
+  background-color: #ef1c25;
+  color: aliceblue;
+  font-size: 20px;
+  padding: 5px;
+  top: 50%;
+  width: 470px;
+  position: absolute;
+  transform: translate(-0%, 0%);
+  }
+  
+  

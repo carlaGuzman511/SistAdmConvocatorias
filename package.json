@@ -1,0 +1,30 @@
+{
+  "name": "sistema-de-administraci-n-convocatorias",
+  "version": "1.0.0",
+  "description": "Sistema de Administración de Convocatorias para Auxiliares",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/kollita/sistema-de-administraci-n-convocatorias.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/kollita/sistema-de-administraci-n-convocatorias/issues"
+  },
+  "homepage": "https://gitlab.com/kollita/sistema-de-administraci-n-convocatorias#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "eslint": "^7.3.1",
+    "express": "^4.17.1",
+    "nodemailer": "^6.4.8",
+    "nodemon": "^2.0.4",
+    "save-dev": "0.0.1-security"
+  },
+  "devDependencies": {}
+}

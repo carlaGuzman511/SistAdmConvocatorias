@@ -1,0 +1,368 @@
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+    initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+  <meta http-equiv="content-type" content="text/plain; charset=UTF-8"/>
+</head>
+
+<div class="jumbotron">
+<h3 class="display-5">
+  {{announcement.title}}
+  <br>
+  GESTION {{announcement.management.period}}
+  <br>
+  FECHA DE PUBLICACION: {{publicationDate()}}
+  <br>
+    ESTADO: {{datesValidator()}}
+</h3>
+<p class="lead">{{announcement.description}}</p>
+<button type="button" class="btn btn-danger" (click)="goBack()">Volver</button>
+<button type="button" class="btn btn-success" (click)="apply()">Postularse</button>
+<hr class="my-6">
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingEleven">
+      <h2 class="mb-0">
+        <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+          1. REQUERIMIENTOS
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordionExample">
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ITEMS</th>
+              <th scope="col">CANTIDAD</th>
+              <th scope="col">HRS. ACADEMICAS</th>
+              <th scope="col">DESTINO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container  *ngFor="let requirement of requirement$| async; let indice=index">
+              <tr>
+                <td>{{indice+1}}</td>
+                <td>{{requirement.itemsQuantity}}</td>
+                <td>{{requirement.auxiliary.academicHours}}</td>
+                <td>{{requirement.auxiliary.name}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          2. REQUISITOS
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">DESCRIPCION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let requestDetail of requestDetail$| async; let indice=index">
+              <tr>
+                <td>{{indice+1}}</td>
+                <td>{{requestDetail.description}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          3. DOCUMENTOS A PRESENTAR
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">DESCRIPCION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let documentDetail of documentDetail$| async; let indice=index">
+              <tr>
+                <td>{{indice+1}}</td>
+                <td>{{documentDetail.detail}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <label class="lead">{{generateDocumentNote()}}</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingFive">
+      <h2 class="mb-0">
+        <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          4. FECHA DE LÍMITE PRESENTACIÓN DE DOCUMENTOS
+        </button>
+      </h2>
+    </div>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+      <div class="card-body">
+        <b>Luga de entrega</b><br>
+        <label for="deliveryPlace">{{deadline.deliveryPlace}}</label><br>
+        <div class="form-row">
+          <div class="col-md-6">
+            <b>Fecha límite: </b><label for="deliveryDate">{{deadline.deliveryDate}}</label><br>
+          </div>
+          <div class="col-md-6">
+            <b>Hora límite </b><label for="deliveryTime">{{deadline.deliveryTime}}</label><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingSix">
+      <h2 class="mb-0">
+        <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+          5. DE LA CALIFICACION DE MERITOS
+        </button>
+      </h2>
+    </div>
+    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+      <div class="card-body">
+        <label class="lead">{{merit.description}}</label>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">DESCRIPCION DE MERITOS</th>
+              <th scope="col">PORCENTAJE (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let detailMerit of detailMerit$| async; let indice=index">
+              <tr>
+                <td>
+                  {{indice+1}}
+                </td>
+                <td>
+                  {{detailMerit.description}}
+                  <table class="table">
+                    <tbody>
+                      <ng-container *ngFor="let item of subDetailMerit$| async; let i=index">
+                        <tr *ngFor="let sub of item; let j=index">
+                          <ng-container *ngIf="indice==i">
+                            <td>
+                              {{i+1}}.{{j+1}}
+                            </td>
+                            <td>
+                              {{sub.description}}
+                              <ng-container *ngFor="let item1 of subSubDetailMerit$| async; let r=index">
+                                <tr *ngFor="let subsub of item1; let q=index">
+                                  <ng-container  *ngIf="indice>0 && j==r" >
+                                    <td>
+                                      {{i+1}}.{{j+1}}.{{q+1}}
+                                    </td>
+                                    <td>
+                                      {{subsub.description}}
+                                      <ng-container *ngFor="let item2 of pointsSubSubDetailMerit$| async; let a=index">
+                                        <tr *ngFor="let pointssubsub of item2; let b=index">
+                                          <ng-container  *ngIf="indice>0 && q==a">
+                                            <td>
+                                              {{i+1}}.{{j+1}}.{{q+1}}.{{b+1}}
+                                            </td>
+                                            <td>
+                                              {{pointssubsub.description}}
+                                            </td>
+                                          </ng-container>
+                                        </tr>
+                                      </ng-container>
+
+                                    </td>
+                                    <td>
+                                      {{subsub.percentage}}
+                                    </td>
+                                  </ng-container>
+                                </tr>
+                              </ng-container>
+                            </td>
+                            <td>
+                              {{sub.percentage}}
+                            </td>
+                          </ng-container>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </td>
+                <td>
+                  {{detailMerit.percentage}}
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingSeven">
+      <h2 class="mb-0">
+        <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+          6. CALIFICACION DE CONOCIMIENTOS
+        </button>
+      </h2>
+    </div>
+    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+      <div class="card-body">
+        <label class="lead">{{knowledge.description}}</label>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">DESCRIPCION</th>
+              <th scope="col">PORCENTAJE(%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let knowledgeEvaluation of knowledgeEvaluation$ | async; let indice=index">
+              <tr>
+                <td>{{indice+1}}</td>
+                <td>{{knowledgeEvaluation.description}}</td>
+                <td>{{knowledgeEvaluation.percentage}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingEight">
+      <h2 class="mb-0">
+        <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+          7. DE LOS TRIBUNALES
+        </button>
+      </h2>
+    </div>
+    <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
+      <div class="card-body">
+        <label class="lead">{{courts.description}}</label>
+      <div class="card-body">
+        <b>Miembros de la comisión de Méritos</b><br>
+        <div class="form-row">
+          <div class="col-md-6">
+            <label>Cantidad de docententes: </label><label for="deliveryPlace">{{courts.meritsCourts}}</label><br>
+          </div>
+          <div class="col-md-6">
+            <label>Cantidad de estudiantes: </label><label for="deliveryTime">{{courts.studentDelegateMerit}}</label><br>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6"><br>
+            <b>Miembros de la comisión de Conocimientos</b><br>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-6">
+            <label>Cantidad de docententes: </label><label for="deliveryPlace">{{courts.knowledgeCourts}}</label><br>
+          </div>
+          <div class="col-md-6">
+            <label>Cantidad de estudiantes: </label><label for="deliveryTime">{{courts.studentDelegateKnowledge}}</label><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingNine">
+      <h2 class="mb-0">
+        <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+          8. FECHAS DE LAS PRUEBAS
+        </button>
+      </h2>
+    </div>
+    <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
+      <div class="card-body">
+        <label class="lead">{{schedule.description}}</label>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">EVENTOS</th>
+              <th scope="col">FECHA</th>
+              <th scope="col">HORA</th>
+              <th scope="col">LUGAR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let event of event$| async; let indice=index">
+              <tr>
+                <td>{{event.name}}</td>
+                <td>{{event.dateEvent}}</td>
+                <td>{{event.timeEvent}}</td>
+                <td>{{event.place}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        <label class="lead">{{generateScheduleNote()}}</label>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingTen">
+      <h2 class="mb-0">
+        <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+          9. DEL NOMBRAMIENTO
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
+      <div class="card-body">
+        <label class="lead">{{announcement.appointment}}</label>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,143 @@
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+   initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+</head>
+
+<div class="table-container">
+    <div class="greeting-title">Calificación de Conocimientos</div>
+
+    <form class="form" [formGroup]="evaluationForm">
+        <div id="alert-description" class="form-group">
+            <input id="description" class="form-control" formControlName="description" placeholder="Añadir Descripcion"
+                [ngClass]="{'form-control': true,
+                'is-invalid': evaluationForm.controls.description.invalid && evaluationForm.controls.description.touched,
+                'is-valid': evaluationForm.controls.description.valid}" id="description">
+            <div
+                *ngIf="evaluationForm.controls.description.errors?.required && evaluationForm.controls.description.touched"
+                class="form-text custom-invalid-feedback">
+                Ingresa la descripcion de la evaluacion
+            </div>
+            <div
+                *ngIf="evaluationForm.controls.description.errors?.minLength && evaluationForm.controls.description.touched"
+                class="form-text custom-invalid-feedback">
+                Cantidad de caracteres minima: 5
+            </div>
+            <div
+                *ngIf="evaluationForm.controls.description.errors?.maxlength && evaluationForm.controls.description.touched"
+                class="form-text custom-invalid-feedback">
+                Cantidad de caracteres maxima: 2500
+        </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6 row">
+                <label class="puntajeBase col-md-6">Puntaje Base:</label>
+                <input id="baseScore" type="text" class="form-control col-md-6" formControlName="baseScore" [ngClass]="{'form-control': true,
+                    'is-invalid': evaluationForm.controls.baseScore.invalid && evaluationForm.controls.baseScore.touched,
+                    'is-valid': evaluationForm.controls.baseScore.valid}">
+                <small
+                    *ngIf="evaluationForm.controls.baseScore.errors?.required && evaluationForm.controls.baseScore.touched"
+                    class="form-text custom-invalid-feedback">
+                    Ingresa el puntaje base de la evaluacion
+                </small>
+                <small
+                    *ngIf="evaluationForm.controls.baseScore.errors?.pattern && evaluationForm.controls.baseScore.touched"
+                    class="form-text custom-invalid-feedback">
+                    Ingresa numeros positivos con una precision de dos decimales 
+                </small>
+            </div>
+
+            <div class="form-group col-md-6 row">
+                <label class="percentage col-md-6">Porcentaje sobre puntaje final: (%)</label>
+                <input id="percentageFinal" type="text" class="form-control col-md-6" formControlName="percentageFinal"
+                    [ngClass]="{'form-control': true,
+                    'is-invalid': evaluationForm.controls.percentageFinal.invalid && evaluationForm.controls.percentageFinal.touched,
+                    'is-valid': evaluationForm.controls.percentageFinal.valid}">
+                <small
+                    *ngIf="evaluationForm.controls.percentageFinal.errors?.required && evaluationForm.controls.percentageFinal.touched"
+                    class="form-text custom-invalid-feedback">
+                    Ingresa el porcentaje sobre puntaje final de la evaluacion
+                </small>
+                <small
+                    *ngIf="evaluationForm.controls.percentageFinal.errors?.pattern && evaluationForm.controls.percentageFinal.touched"
+                    class="form-text custom-invalid-feedback">
+                    Ingresa numeros positivos con una precision de dos decimales 
+                </small>
+            </div>
+        </div>
+
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Descripcion Evaluacion</th>
+                        <th scope="col">Porcentaje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">1</td>
+                        <td>
+                            <label class="writtenScore col-md-12">EVALUACION ESCRITA</label>
+                        </td>
+                        <td>
+                            <div class="form-group col-md-6 row">
+                                <input id="writtenScore" type="text" class="form-control col-md-6" formControlName="writtenScore" 
+                                    [ngClass]="{'form-control': true,
+                                    'is-invalid': evaluationForm.controls.writtenScore.invalid && evaluationForm.controls.writtenScore.touched,
+                                    'is-valid': evaluationForm.controls.writtenScore.valid}">
+                                <small
+                                    *ngIf="evaluationForm.controls.writtenScore.errors?.required && evaluationForm.controls.writtenScore.touched"
+                                    class="form-text custom-invalid-feedback">
+                                    Ingresa el porcentaje de la evaluacion escrita
+                                </small>
+                                <small
+                                    *ngIf="evaluationForm.controls.writtenScore.errors?.pattern && evaluationForm.controls.writtenScore.touched"
+                                    class="form-text custom-invalid-feedback">
+                                    Ingresa numeros positivos con una precision de dos decimales 
+                                </small>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row">2</td>
+                        <td>
+                            <div class="form-group col-md-12 row">
+                                <label class="oralScore col-md-12">EVALUACION ORAL</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group col-md-6 row">
+                                <input id="oralScore" type="text" class="form-control col-md-6" formControlName="oralScore"
+                                    [ngClass]="{'form-control': true,
+                                    'is-invalid': evaluationForm.controls.oralScore.invalid && evaluationForm.controls.oralScore.touched,
+                                    'is-valid': evaluationForm.controls.oralScore.valid}">
+                                <small
+                                    *ngIf="evaluationForm.controls.oralScore.errors?.required && evaluationForm.controls.oralScore.touched"
+                                    class="form-text custom-invalid-feedback">
+                                    Ingresa el porcentaje de la evaluacion oral
+                                </small>
+                                <small
+                                    *ngIf="evaluationForm.controls.oralScore.errors?.pattern && evaluationForm.controls.oralScore.touched"
+                                    class="form-text custom-invalid-feedback">
+                                    Ingresa numeros positivos con una precision de dos decimales 
+                                </small>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-6">
+                <button class="btn btn-sm btn-danger btn-lg btn-block " type="submit" (click)="cancel()">Cancelar</button>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-sm btn-primary btn-lg btn-block" (click)="save()" [disabled]="!evaluationForm.valid">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,249 @@
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+     initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+  <form class="label-form" style="width:100%;" [formGroup]="form">
+      <h3 class="container text-center">REGISTRAR TABLA CALIFICACIÓN DE MÉRITOS</h3>
+      <label for="description" class="field">Descripción</label>
+      <textarea  type="text" class="form-control" formControlName="description"[ngClass]="{'form-control': true,
+      'is-invalid': form.controls.description.invalid && form.controls.description.touched,
+      'is-valid': form.controls.description.valid}"></textarea>
+      <small *ngIf="form.controls.description.errors?.required && form.controls.description.touched" class="form-text custom-invalid-feedback">La descripción es requerida</small>
+      <small *ngIf="form.controls.description.errors?.maxlength && form.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese 1000 caracteres como máximo</small>
+      <small *ngIf="form.controls.description.errors?.minlength && form.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+      <br>
+      <div class="form-row">
+          <div class="form-group col-md-2">
+            <br>
+            <label for="description" class="field">Puntaje Base</label>
+          </div>
+          <div class="form-group col-md-2">
+            <input type="tel" class="form-control" formControlName="baseScore"[ngClass]="{'form-control': true,
+            'is-invalid': form.controls.baseScore.invalid && form.controls.baseScore.touched,
+            'is-valid': form.controls.baseScore.valid}">
+            <small *ngIf="form.controls.baseScore.errors?.required && form.controls.baseScore.touched" class="form-text custom-invalid-feedback">El puntaje base es requerido</small>
+            <small *ngIf="form.controls.baseScore.errors?.maxlength && form.controls.baseScore.touched" class="form-text custom-invalid-feedback">Ingrese números de 3 dígitos como máximo</small>
+            <small *ngIf="form.controls.baseScore.errors?.pattern && form.controls.baseScore.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+          </div>
+          <div class="form-group col-md-2"></div>
+          <div class="form-group col-md-3">
+            <br>
+            <label for="description" class="field">Porcentaje sobre el puntaje final</label>
+          </div>
+          <div class="form-group col-md-2">
+            <input type="tel" class="form-control" formControlName="percentage"[ngClass]="{'form-control': true,
+            'is-invalid': form.controls.percentage.invalid && form.controls.percentage.touched,
+            'is-valid': form.controls.percentage.valid}">
+            <small *ngIf="form.controls.percentage.errors?.required && form.controls.percentage.touched" class="form-text custom-invalid-feedback">El porcentaje sobre el puntaje final es requerido</small>
+            <small *ngIf="form.controls.percentage.errors?.maxlength && form.controls.percentage.touched" class="form-text custom-invalid-feedback">Ingrese números de 2 dígitos como máximo</small>
+            <small *ngIf="form.controls.percentage.errors?.pattern && form.controls.percentage.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+          </div>
+          <div class="col-md-1">
+            <br>
+            <h5>%</h5>
+          </div>
+      </div>
+      <hr>
+      <!-- X -->
+      <div formArrayName="merits">
+        <div *ngFor="let X of form['controls'].merits['controls']; let ix=index">
+          <div formGroupName="{{ix}}" class="Xs">
+            <div class="form-group row">
+              <div class="col-md-9">
+                <br>
+               <b>MÉRITO N° {{ix+1}}</b>
+               <hr>
+              </div>
+              <div class="col-md-3">
+                <br>
+                <button class="btn btn-sm btn-danger" (click)="removeX(ix)"><i class="fa fa-trash">  Eliminar mérito</i></button>
+              </div>
+            </div>
+            <div formArrayName="note">
+              <div *ngFor="let note of X['controls'].note['controls']; let inote=index">
+                <div formGroupName="{{inote}}" class="Xs">
+                  <div class="form-group row">
+                    <div class="col-md-11">
+                      <label for="note" class="field">Nota</label>
+                      <textarea  type="text" class="form-control" formControlName="note" [ngClass]="{'form-control': true,
+                      'is-invalid': note.controls.note.invalid && note.controls.note.touched,
+                      'is-valid': note.controls.note.valid}"></textarea>
+                      <small *ngIf="note.controls.note.errors?.required && note.controls.note.touched" class="form-text custom-invalid-feedback">Ingrese una nota o elimine el campo</small>
+                      <small *ngIf="note.controls.note.errors?.maxlength && note.controls.note.touched" class="form-text custom-invalid-feedback">Ingrese 150 caracteres como máximo</small>
+                      <small *ngIf="note.controls.note.errors?.minlength && note.controls.note.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+                    </div>
+                    <div class="col-md-1">
+                      <br>
+                      <button class="btn btn-danger" (click)="removeNote(ix, inote)"><i class="fa fa-trash"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <div class="form-group row">
+                  <div class="col-md-9">
+                    <b>DESCRIPCIÓN</b>
+                    <input type="text" class="form-control" formControlName="merit"  [ngClass]="{'form-control': true,
+                    'is-invalid': X.controls.merit.invalid && X.controls.merit.touched,
+                    'is-valid': X.controls.merit.valid}">
+                    <small *ngIf="X.controls.merit.errors?.required && X.controls.merit.touched" class="form-text custom-invalid-feedback">Ingrese la descripción o elimine la columna</small>
+                    <small *ngIf="X.controls.merit.errors?.maxlength && X.controls.merit.touched" class="form-text custom-invalid-feedback">Ingrese 150 caracteres como máximo</small>
+                    <small *ngIf="X.controls.merit.errors?.minlength && X.controls.merit.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+                  </div>
+                  <div class="col-md-2">
+                    <b>PORCENTAJE</b>
+                    <input type="text" class="form-control" formControlName="percentage" [ngClass]="{'form-control': true,
+                    'is-invalid': X.controls.percentage.invalid && X.controls.percentage.touched,
+                    'is-valid': X.controls.percentage.valid}">
+                    <small *ngIf="X.controls.percentage.errors?.required && X.controls.percentage.touched" class="form-text custom-invalid-feedback">Ingrese el porcentaje o elimine la columna</small>
+                    <small *ngIf="X.controls.percentage.errors?.maxlength && X.controls.percentage.touched" class="form-text custom-invalid-feedback">Ingrese números de 2 dígitos como máximo</small>
+                    <small *ngIf="X.controls.percentage.errors?.pattern && X.controls.percentage.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+                  </div>
+              </div>
+            <!-- Y -->
+            <div formArrayName="details">
+              <div *ngFor="let Y of X['controls'].details['controls']; let iy=index">
+                <div formGroupName="{{iy}}" class="Ys">
+                    <b>DETALLE N° {{ix+1}}.{{iy+1}}</b>
+                    <hr>
+                  <div class="form-group row">
+                    <div class="col-md-9">
+                      <label for="detail">Descripción</label>
+                      <input type="text" class="form-control" formControlName="detail" [ngClass]="{'form-control': true,
+                      'is-invalid': Y.controls.detail.invalid && Y.controls.detail.touched,
+                      'is-valid': Y.controls.detail.valid}">
+                      <small *ngIf="Y.controls.detail.errors?.required && Y.controls.detail.touched" class="form-text custom-invalid-feedback">Ingrese el detalle o elimine la columna</small>
+                      <small *ngIf="Y.controls.detail.errors?.maxlength && Y.controls.detail.touched" class="form-text custom-invalid-feedback">Ingrese 150 caracteres como máximo</small>
+                      <small *ngIf="Y.controls.detail.errors?.minlength && Y.controls.detail.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="percent">Porcentaje</label>
+                      <input type="text" class="form-control" formControlName="percent" [ngClass]="{'form-control': true,
+                      'is-invalid': Y.controls.percent.invalid && Y.controls.percent.touched,
+                      'is-valid': Y.controls.percent.valid}">
+                      <small *ngIf="Y.controls.percent.errors?.required && Y.controls.percent.touched" class="form-text custom-invalid-feedback">Ingrese el porcentaje o elimine la columna</small>
+                      <small *ngIf="Y.controls.percent.errors?.maxlength && Y.controls.percent.touched" class="form-text custom-invalid-feedback">IIngrese números de 2 dígitos como máximo</small>
+                      <small *ngIf="Y.controls.percent.errors?.pattern && Y.controls.percent.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+                    </div>
+                    <div class="col-md-1">
+                      <br>
+                      <button class="btn btn-danger" (click)="removeY(ix, iy)"><i class="fa fa-trash"></i></button>
+                    </div>
+                  </div>
+
+                  <!-- Z -->
+                  <div formArrayName="subdetails">
+                    <div *ngFor="let Z of Y['controls'].subdetails['controls']; let iz=index">
+                      <div formGroupName="{{iz}}" class="Zs">
+                        <b>SUBDETALLE N° {{ix+1}}.{{iy+1}}.{{iz+1}}</b>
+                        <hr>
+                        <div class="form-group row">
+                          <div class="col-md-9">
+                            <label for="subdetail">Descripción</label>
+                            <input type="text" class="form-control" formControlName="subdetail" [ngClass]="{'form-control': true,
+                            'is-invalid': Z.controls.subdetail.invalid && Z.controls.subdetail.touched,
+                            'is-valid': Z.controls.subdetail.valid}">
+                            <small *ngIf="Z.controls.subdetail.errors?.required && Z.controls.subdetail.touched" class="form-text custom-invalid-feedback">Ingrese el sub detalle o elimine la columna</small>
+                            <small *ngIf="Z.controls.subdetail.errors?.maxlength && Z.controls.subdetail.touched" class="form-text custom-invalid-feedback">Ingrese 150 caracteres como máximo</small>
+                            <small *ngIf="Z.controls.subdetail.errors?.minlength && Z.controls.subdetail.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+                          </div>
+                          <div class="col-md-2">
+                            <label for="percent">Porcentaje</label>
+                            <input type="text" class="form-control" formControlName="percent" [ngClass]="{'form-control': true,
+                            'is-invalid': Z.controls.percent.invalid && Z.controls.percent.touched,
+                            'is-valid': Z.controls.percent.valid}">
+                            <small *ngIf="Z.controls.percent.errors?.required && Z.controls.percent.touched" class="form-text custom-invalid-feedback">Ingrese el porcentaje o elimine la columna</small>
+                            <small *ngIf="Z.controls.percent.errors?.maxlength && Z.controls.percent.touched" class="form-text custom-invalid-feedback">IIngrese números de 2 dígitos como máximo</small>
+                            <small *ngIf="Z.controls.percent.errors?.pattern && Z.controls.percent.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+                          </div>
+                          <div class="col-md-1">
+                            <br>
+                            <button class="btn btn-danger" (click)="removeZ(ix, iy, iz)"><i class="fa fa-trash"></i></button>
+                          </div>
+                        </div>
+                        <!-- PointDetail -->
+                        <div formArrayName="pointDetail">
+                            <div *ngFor="let pointDetail of Z['controls'].pointDetail['controls']; let iPointDetail=index">
+                              <div formGroupName="{{iPointDetail}}" class="pointDetail">
+                                <b>DETALLE DE PUNTOS N° {{ix+1}}.{{iy+1}}.{{iz+1}}.{{iPointDetail+1}}</b>
+                                <hr>
+                                <div class="form-group row">
+                                  <div class="col-md-9">
+                                    <label for="description">Descripción</label>
+                                    <input type="text" class="form-control" formControlName="description" [ngClass]="{'form-control': true,
+                                    'is-invalid': pointDetail.controls.description.invalid && pointDetail.controls.description.touched,
+                                    'is-valid': pointDetail.controls.description.valid}">
+                                    <small *ngIf="pointDetail.controls.description.errors?.required && pointDetail.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese la descripción o elimine la columna</small>
+                                    <small *ngIf="pointDetail.controls.description.errors?.maxlength && pointDetail.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese 150 caracteres como máximo</small>
+                                    <small *ngIf="pointDetail.controls.description.errors?.minlength && pointDetail.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+                                  </div>
+                                  <div class="col-md-2">
+                                    <label for="points">Puntos</label>
+                                    <input type="text" class="form-control" formControlName="points" [ngClass]="{'form-control': true,
+                                    'is-invalid': pointDetail.controls.points.invalid && pointDetail.controls.points.touched,
+                                    'is-valid': pointDetail.controls.points.valid}">
+                                    <small *ngIf="pointDetail.controls.points.errors?.required && pointDetail.controls.points.touched" class="form-text custom-invalid-feedback">Ingrese los puntos o elimine la columna</small>
+                                    <small *ngIf="pointDetail.controls.points.errors?.maxlength && pointDetail.controls.points.touched" class="form-text custom-invalid-feedback">Ingrese números de 3 dígitos como máximo</small>
+                                    <small *ngIf="pointDetail.controls.points.errors?.pattern && pointDetail.controls.points.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+                                  </div>
+                                  <div class="col-md-1">
+                                    <br>
+                                    <button class="btn btn-danger" (click)="removePointDetail(ix, iy, iz, iPointDetail)"><i class="fa fa-trash"></i></button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <button class="btn btn-sm btn-green" (click)="addPointDetail(ix,iy,iz)">Añadir Detalle de Puntos</button>
+                          </div>
+                          <!-- PointDetail End -->
+                      </div>
+                    </div>
+                    <button class="btn btn-sm btn-green" (click)="addZ(ix,iy)">Añadir Subdetalle</button>
+                  </div>
+                  <!-- Z End -->
+
+                </div>
+              </div>
+              <button class="btn btn-sm btn-green" (click)="addY(ix)">Añadir Detalle</button>
+            </div>
+            <!-- Y End-->
+          </div>
+        </div>
+        <button class="btn btn-sm btn-primary" (click)="addX()">Añadir Mérito</button>
+      </div>
+      <!-- X End -->
+      <br>
+      <div formArrayName="notes">
+        <div *ngFor="let Y of form['controls'].notes['controls']; let iy=index">
+          <div formGroupName="{{iy}}">
+              <b>Nota</b>
+            <div class="form-group row">
+              <div class="col-md-11">
+                <textarea type="text" class="form-control" formControlName="note"  [ngClass]="{'form-control': true,
+                'is-invalid': Y.controls.note.invalid && Y.controls.note.touched,
+                'is-valid': Y.controls.note.valid}"></textarea>
+                <small *ngIf="Y.controls.note.errors?.required && Y.controls.note.touched" class="form-text custom-invalid-feedback">Ingrese una nota o elimine el campo</small>
+                <small *ngIf="Y.controls.note.errors?.maxlength && Y.controls.note.touched" class="form-text custom-invalid-feedback">Ingrese 2000 caracteres como máximo</small>
+                <small *ngIf="Y.controls.note.errors?.minlength && Y.controls.note.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+              </div>
+              <div class="col-md-1">
+                <button class="btn btn-danger" (click)="removeA(iy)"><i class="fa fa-trash"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <button class="btn btn-sm btn-danger btn-lg btn-block " type="submit" (click)="cancel()">Cancelar</button>
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (click)="save()" [disabled]="!form.valid">Guardar</button>
+        </div>
+      </div>
+    </form>
+        <!--<h5>Field Values</h5>
+        <pre style="font-size:15px">{{ form.value | json }}</pre>-->
+

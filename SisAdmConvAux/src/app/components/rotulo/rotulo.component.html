@@ -1,0 +1,124 @@
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+     initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+</head>
+
+<div class="label-container">
+    <form  class="label-form" id="LabelForm" [formGroup]="labelForm">
+        <h3 class="container text-center">RÓTULO</h3>
+        <hr>
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                <label for="name" class="field">Nombre(s)</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    required
+                    formControlName="name"/>
+                <div class="text-danger" *ngIf="labelForm.controls.name.touched && labelForm.controls.name.invalid">
+                    <div *ngIf="labelForm.controls.name.errors.required">Tu nombre es requerido</div>
+                    <div *ngIf="labelForm.controls.name.errors.pattern"> Ingresa sólo letras</div>
+                    <div *ngIf="labelForm.controls.name.errors.minlength">Ingresa 3 caracteres como mínimo</div>
+                    <div *ngIf="labelForm.controls.name.errors.maxlength">Ingresa 50 caracteres como máximo</div>
+                </div>
+            </div>
+            <div class="form-group col-md-7">
+                <label for="surname" class="field">Apellidos</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    required
+                    formControlName="surname"/>
+                <div class="text-danger" *ngIf="labelForm.controls.surname.touched && labelForm.controls.surname.invalid">
+                    <div *ngIf="labelForm.controls.surname.errors.required">Tus apellidos son requeridos</div>
+                    <div *ngIf="labelForm.controls.surname.errors.pattern"> Ingresa sólo letras</div>
+                    <div *ngIf="labelForm.controls.surname.errors.minlength">Ingresa 3 caracteres como mínimo</div>
+                    <div *ngIf="labelForm.controls.surname.errors.maxlength">Ingresa 50 caracteres como máximo</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="ci" class="field">Carnet de Identidad</label>
+            <input
+                type="text"
+                class="form-control"
+                required
+                formControlName="ci"/>
+            <div class="text-danger" *ngIf="labelForm.controls.ci.touched && labelForm.controls.ci.invalid">
+                <div *ngIf="labelForm.controls.ci.errors.required">Tu número de carnet de identidad es requerido</div>
+                <div *ngIf="labelForm.controls.ci.errors.minlength">Ingresa 7 caracteres como mínimo</div>
+                <div *ngIf="labelForm.controls.ci.errors.maxlength">Ingresa 8 caracteres como máximo</div>
+                <div *ngIf="labelForm.controls.ci.errors.pattern"> Ingresa sólo números</div>
+            </div>
+          </div>
+          <div class="form-group col-md-8">
+            <label for="address" class="field">Dirección</label>
+            <input
+                type="text"
+                class="form-control"
+                required
+                formControlName="address"/>
+            <div class="text-danger" *ngIf="labelForm.controls.address.touched && labelForm.controls.address.invalid">
+                <div *ngIf="labelForm.controls.address.errors.required">Tu dirección es requerido</div>
+                <div *ngIf="labelForm.controls.address.errors.minlength">Ingresa 10 caracteres como mínimo</div>
+                <div *ngIf="labelForm.controls.address.errors.maxlength">Ingresa 255 caracteres como máximo</div>
+            </div>
+          </div>
+      </div>
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                <label for="phone" class="field">Teléfono</label>
+                <input
+                    type="tel"
+                    class="form-control"
+                    required
+                    formControlName="phone"/>
+                <div class="text-danger" *ngIf="labelForm.controls.phone.touched && labelForm.controls.phone.invalid">
+                    <div *ngIf="labelForm.controls.phone.errors.required"> Tu número de teléfono es requerido</div>
+                    <div *ngIf="labelForm.controls.phone.errors.pattern"> Ingresa sólo números</div>
+                    <div *ngIf="labelForm.controls.phone.errors.minlength">Ingresa 7 números como mínimo</div>
+                    <div *ngIf="labelForm.controls.phone.errors.maxlength"> Ingresa 13 números como máximo</div>
+                </div>
+            </div>
+            <div class="form-group col-md-7">
+                <label for="email" class="field">E-mail</label>
+                <input
+                    type="email"
+                    class="form-control"
+                    required
+                    formControlName="email"/>
+                <div class="text-danger" *ngIf="labelForm.controls.email.touched && labelForm.controls.email.invalid">
+                    <div *ngIf="labelForm.controls.email.errors.required"> Tu e-mail es requerido</div>
+                    <div *ngIf="labelForm.controls.email.errors.email"> Ingresa un e-mail válido</div>
+                    <div *ngIf="labelForm.controls.email.errors.minlength">Ingresa 6 caracteres como mínimo</div>
+                    <div *ngIf="labelForm.controls.email.errors.maxlength"> Ingresa 70 caracteres como máximo</div>
+                </div>
+            </div>
+        </div>
+        <label for="career" class="field">Carrera</label>
+          <select id="career" class="selectpicker" data-live-search="true" formControlName="career" [ngClass]="{'form-control': true,
+            'is-invalid': labelForm.controls.career.invalid && labelForm.controls.career.touched,
+            'is-valid': labelForm.controls.career.valid}">
+            <option *ngFor="let item of careers" data-tokens="item.name"value={{item.idcareer}}>{{item.name}}</option>
+          </select>
+          <small *ngIf="labelForm.controls.career.invalid && labelForm.controls.career.touched" class="form-text custom-invalid-feedback">Seleccione su carrera</small>
+        <br>
+        <label for="codItem" class="field">Nombre de Auxiliatura</label>
+        <select formControlName="codItem"  class="form-control" [(ngModel)]="currentItem.idauxiliary" (change)="selectedItem(currentItem.idauxiliary)">
+            <option *ngFor="let item of codItems" value={{item.idauxiliary}}>{{item.name}}</option>
+        </select>
+        <br>
+        <label for="auxName" class="field">Código de Ítem</label>
+        <input type="text"  class="form-control" formControlName="auxiliary" value="{{currentItem.code}}" disabled>
+        <br>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <button [routerLink]="['/listarConvocatorias']" routerLinkActive="router-link-active" class="btn btn-sm btn-danger btn-lg btn-block" type="button" data-toggle="modal" data-target="#cancel">Cancelar</button>
+            </div>
+            <div class="form-group col-md-6">
+                <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (click)="savePostulation()" [disabled]="!labelForm.valid">Descargar</button>
+            </div>
+        </div>
+    </form>
+</div>

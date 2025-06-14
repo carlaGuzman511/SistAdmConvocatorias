@@ -1,0 +1,105 @@
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+     initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<form class="label-form" [formGroup]="form">
+  <br>
+<h3 class="container text-center">CRONOGRAMA GENERAL DE LA CONVOCATORIA</h3>
+<hr>
+  <div formArrayName="description">
+  <div *ngFor="let de of form['controls'].description['controls']; let i=index" class="form-group row" >
+    <div formGroupName="{{i}}" class="col-md-11">
+    <label for="description" class="field">Descripción</label>
+    <textarea type="text" class="form-control" formControlName="description" ></textarea>
+    <small *ngIf="de.controls.description.errors?.maxlength && de.controls.description.touched"
+      class="form-text custom-invalid-feedback text-danger">Ingrese 150 caracteres como máximo</small>
+    <small *ngIf="de.controls.description.errors?.minlength && de.controls.description.touched"
+      class="form-text custom-invalid-feedback text-danger">Ingrese 10 caracteres como mínimo</small>
+    </div>
+    <div class="col-md-1">
+      <br>
+       <button class="btn btn-danger" (click)="removeDesc(i)"><i class="fa fa-trash"></i></button>
+     </div>
+    </div>
+  </div>
+  <br>
+
+  <div formArrayName="schedule" class="eventSchedule">
+    <div *ngFor="let sh of form['controls'].schedule['controls']; let i=index">
+      <div formGroupName="{{i}}" class="form-group row" >
+        <div class="col-md-3">
+          <label for="eventName">Evento</label>
+            <!-- <input formControlName="eventName" [typeahead]="events"  class="form-control"> -->
+          <select id="inputState" class="selectpicker" data-live-search="true" formControlName="eventName" [ngClass]="{'form-control': true,
+            'is-invalid': sh.controls.eventName.invalid && sh.controls.eventName.touched,
+            'is-valid': sh.controls.eventName.valid}">
+            <option *ngFor="let ev of events" data-tokens="ev" value={{ev}}>{{ev}}</option>
+          </select> 
+          <small class="text-danger" *ngIf="sh.controls.eventName.errors?.required && sh.controls.eventName.touched">El
+            evento es requerido
+          </small>
+          <small *ngIf="sh.controls.eventName.errors?.maxlength && sh.controls.eventName.touched"
+          class="form-text custom-invalid-feedback text-danger">Ingrese 150 caracteres como máximo</small>
+        <small *ngIf="sh.controls.eventName.errors?.minlength && sh.controls.eventName.touched"
+          class="form-text custom-invalid-feedback text-danger">Ingrese 4 caracteres como mínimo</small>
+        </div>
+        <div class="col-md-3">
+          <label for="date">Fecha</label>
+          <input type="date"  class="form-control" formControlName="date" min="{{minDate | date:'yyyy-MM-dd'}}"> 
+          <small *ngIf="sh.controls.date.errors?.required && sh.controls.date.touched " class=" text-danger">La fecha es
+            requerida</small>
+        </div>
+        <div class="col-md-2">
+          <label for="time">Hora</label>
+          <input type="time" formControlName="time" class="form-control" placeholder="00:00">
+          <div class="text-danger" *ngIf="sh.controls.time.touched && sh.controls.time.invalid">
+            <small *ngIf="sh.controls.time.errors.required" class="text-danger">La hora es requerida </small>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label for="place">Lugar</label>
+          <input type="text" formControlName="place" class="form-control">
+          <small *ngIf="sh.controls.place.errors?.required && sh.controls.place.touched " class="text-danger"> El lugar
+            es requerido </small>
+            <small *ngIf="sh.controls.place.errors?.maxlength && sh.controls.place.touched"
+            class="form-text custom-invalid-feedback text-danger">Ingrese 150 caracteres como máximo</small>
+          <small *ngIf="sh.controls.place.errors?.minlength && sh.controls.place.touched"
+            class="form-text custom-invalid-feedback text-danger">Ingrese 4 caracteres como mínimo</small>
+        </div>
+        <div class="col-md-1">
+         <br>
+          <button class="btn btn-danger" (click)="removeEvent(i)"><i class="fa fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-sm btn-primary" (click)="addEvent()">Añadir evento</button>
+  <br>
+  <div formArrayName="note">
+  <div *ngFor="let note of form['controls'].note['controls']; let i=index" class="form-group row" >
+    <div formGroupName="{{i}}" class="col-md-11">
+    <label for="note" class="field">Nota</label>
+    <textarea type="text" class="form-control" formControlName="note"></textarea>
+    <small *ngIf="note.controls.note.errors?.minlength && note.controls.note.touched"
+      class="form-text custom-invalid-feedback text-danger">Ingrese 10 caracteres como mínimo</small>
+    <small *ngIf="note.controls.note.errors?.maxlength && note.controls.note.touched"
+      class="form-text custom-invalid-feedback text-danger">Ingrese 150 caracteres como maximo</small>
+  </div>
+  <div class="col-md-1">
+    <br>
+     <button class="btn btn-danger" (click)="removeNote(i)"><i class="fa fa-trash"></i></button>
+   </div>
+</div>
+</div>
+<br>
+<div class="form-row">
+  <div class="col-md-6">
+    <button class="btn btn-sm btn-danger btn-lg btn-block " type="submit" (click)="cancel()">Cancelar</button>
+  </div>
+  <div class="col-md-6">
+    <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (click)="saveEvents()" [disabled]="!form.valid">Guardar</button>
+  </div>
+</div>
+</form>

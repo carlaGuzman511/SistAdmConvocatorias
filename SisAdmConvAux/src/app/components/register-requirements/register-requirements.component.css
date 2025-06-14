@@ -1,0 +1,102 @@
+.Xs, .Ys, .Zs, .pointDetail, p{
+  margin: 10px;
+ }
+
+ input{
+   margin: 10px;
+ }
+
+ input[type="button"], p{
+   margin-top: 0px;
+ }
+
+
+ .Xs{
+   border: #e9e8e8 3px;
+   background-color: #f3f3f3;
+ }
+
+ .Ys{
+   border: rgb(228, 227, 227) solid 1px;
+     background-color: #e6e3e3;
+ }
+
+ .Zs{
+   border: rgb(211, 210, 210) solid 1px;
+     background-color: #d8d7d7;
+ }
+
+ .pointDetail{
+  border: rgb(194, 193, 193) solid 1px;
+    background-color: #c2c2c2;
+}
+
+ input[value="Add X"]{
+   background-color: #ff7f7f;
+ }
+
+ input[value="Add Y"]{
+     background-color: #7fbf7f;
+ }
+
+ input[value="Add Z"]{
+      background-color: #7f7fff;
+ }
+
+ .form-container {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: 100%;
+  grid-template-areas: ". form .";
+}
+
+.field {
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+}
+
+.label-form {
+  border: 1px solid #E1E1E1;
+  border-radius: 5px;
+  padding: 15px;
+  width: 800px;
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+.btn-primary, .btn-primary:visited, .btn-primary:active {
+  background-color: #003770 !important;
+  border-color: #003770 !important;
+}
+
+.btn-primary:hover {
+  background-color: #003670d5 !important;
+  border-color: #003670d5 !important;
+}
+
+.btn-green, .btn-green:visited, .btn-green:active {
+  background-color: #D0D3D1 !important;
+  border-color: #D0D3D1 !important;
+}
+
+.btn-green:hover {
+  background-color: #D0D3D1 !important;
+  border-color: #D0D3D1 !important;
+}
+.btn-secondary, .btn-secondary:visited, .btn-secondary:active {
+  background-color: #FF0000 !important;
+  border-color: #FF0000 !important;
+}
+
+.btn-secondary:hover {
+  background-color: #ef1c27d8 !important;
+  border-color: #ef1c27d8 !important;
+}
+
+.label {
+  display: block;
+  margin: .50em 0 0 0;
+}
+

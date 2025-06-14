@@ -1,0 +1,25 @@
+.nav-item {
+    padding: 20px;
+  
+  }
+  .nav-link:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+  }
+  .navbar-collapse{
+    font-size: 20px;
+  }
+  
+  .navbar > .navbar-nav {
+    font-size: 18px;
+  }  
+  .dropdown-item:hover, 
+  .dropdown-item:focus {
+      color: #fff;
+      background-color: #003770;
+   }
+  .infoUser{
+    font-size: 14px;;
+    color: #85929E;
+  }
+  

@@ -1,0 +1,14 @@
+.field{
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+}
+.eventSchedule{
+border: 1px solid #E1E1E1;
+border-radius: 5px;
+padding: 20px;
+}
+.label-form {
+  border: 1px solid #E1E1E1;
+  border-radius: 5px;
+  padding: 15px;
+}

@@ -1,0 +1,51 @@
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+   initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<form class="label-form" style="width:100%;" [formGroup]="form">
+<br>
+<h3 class="container text-center">DATOS DE RÓTULO</h3>
+<hr>
+<label for="description" class="field">Descripción</label>
+<textarea  type="text" class="form-control" formControlName="description"[ngClass]="{'form-control': true,
+ 'is-invalid': form.controls.description.invalid && form.controls.description.touched,
+ 'is-valid': form.controls.description.valid}"></textarea>
+  <small *ngIf="form.controls.description.errors?.required && form.controls.description.touched" class="form-text custom-invalid-feedback">La descripción es requerida</small>
+  <small *ngIf="form.controls.description.errors?.maxlength && form.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese 500 caracteres como máximo</small>
+  <small *ngIf="form.controls.description.errors?.minlength && form.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+  <br>
+<!-- X -->
+<div formArrayName="datas">
+  <div *ngFor="let X of form['controls'].datas['controls']; let ix=index">
+    <div formGroupName="{{ix}}" class="Xs">
+        <b> Dato N° {{ix+1}}</b>
+      <div class="form-group row">
+        <div class="col-md-11">
+          <input type="text" class="form-control" formControlName="shapex"  [ngClass]="{'form-control': true,
+          'is-invalid': X.controls.shapex.invalid && X.controls.shapex.touched,
+          'is-valid': X.controls.shapex.valid}">
+          <small *ngIf="X.controls.shapex.errors?.required && X.controls.shapex.touched" class="form-text custom-invalid-feedback">Ingrese un dato o elimine el campo</small>
+          <small *ngIf="X.controls.shapex.errors?.maxlength && X.controls.shapex.touched" class="form-text custom-invalid-feedback">Ingrese 255 caracteres como máximo</small>
+          <small *ngIf="X.controls.shapex.errors?.minlength && X.controls.shapex.touched" class="form-text custom-invalid-feedback">Ingrese 5 caracteres como mínimo</small>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-danger" (click)="removeX(ix)"><i class="fa fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-sm btn-primary" (click)="addX()">Añadir dato</button>
+</div>
+    <!-- X End -->
+<br>
+<div class="form-row">
+  <div class="col-md-6">
+    <button class="btn btn-sm btn-danger btn-lg btn-block ">Cancelar</button>
+  </div>
+  <div class="col-md-6">
+    <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (click)="save()" [disabled]="!form.valid">Guardar</button>
+  </div>
+</div>
+</form>
+

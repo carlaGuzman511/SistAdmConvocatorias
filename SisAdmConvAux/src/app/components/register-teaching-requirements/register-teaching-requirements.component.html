@@ -1,0 +1,64 @@
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+     initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<form class="label-form" style="width:100%;" [formGroup]="form">
+  <br>
+  <h3 class="container text-center">REQUERIMIENTOS</h3>
+  <hr>
+  <!-- X -->
+  <div formArrayName="requirements">
+    <div *ngFor="let X of form['controls'].requirements['controls']; let ix=index">
+      <div formGroupName="{{ix}}" class="Xs">
+          <b>REQUERIMIENTO N° {{ix+1}}</b>
+          <hr>
+        <div class="form-group row">
+          <div class="col-sm-2">
+            <label for="itemsQuantity">Cantidad</label>
+            <input type="text" class="form-control" formControlName="itemsQuantity"  [ngClass]="{'form-control': true,
+            'is-invalid': X.controls.itemsQuantity.invalid && X.controls.itemsQuantity.touched,
+            'is-valid': X.controls.itemsQuantity.valid}">
+            <small *ngIf="X.controls.itemsQuantity.errors?.required && X.controls.itemsQuantity.touched" class="form-text custom-invalid-feedback">Ingrese la cantidad de items o elimina la columna</small>
+            <small *ngIf="X.controls.itemsQuantity.errors?.maxlength && X.controls.itemsQuantity.touched" class="form-text custom-invalid-feedback">Ingrese 2 dígitos como máximo</small>
+            <small *ngIf="X.controls.itemsQuantity.errors?.pattern && X.controls.itemsQuantity.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+          </div>
+          <div class="col-sm-2">
+            <label for="academicHours">Horas Académicas</label>
+            <input type="text" class="form-control" formControlName="academicHours" placeholder="8 Hrs/Mes"  [ngClass]="{'form-control': true,
+              'is-invalid': X.controls.academicHours.invalid && X.controls.academicHours.touched,
+              'is-valid': X.controls.academicHours.valid}">
+              <small *ngIf="X.controls.academicHours.errors?.required && X.controls.academicHours.touched" class="form-text custom-invalid-feedback">Ingrese las horas académicas o elimina la columna</small>
+              <small *ngIf="X.controls.academicHours.errors?.maxlength && X.controls.academicHours.touched" class="form-text custom-invalid-feedback">Ingrese 11 caracteres como máximo</small>
+              <small *ngIf="X.controls.academicHours.errors?.minlength && X.controls.academicHours.touched" class="form-text custom-invalid-feedback">Ingrese 9 caracteres como mínimo</small>
+          </div>
+          <div class="col-sm-7">
+            <label for="auxiliary" class="field">Auxiliatura</label>
+            <select id="inputState" class="selectpicker" data-live-search="true" formControlName="auxiliary" [ngClass]="{'form-control': true,
+              'is-invalid': X.controls.auxiliary.invalid && X.controls.auxiliary.touched,
+              'is-valid': X.controls.auxiliary.valid}">
+              <option *ngFor="let item of requirementsList" data-tokens="item.name"value={{item.idauxiliary}}>{{item.name}}</option>
+            </select>
+            <small *ngIf="X.controls.auxiliary.invalid && X.controls.auxiliary.touched" class="form-text custom-invalid-feedback">Seleccione una auxiliatura o elimine la columna</small>
+          </div>
+          <div class="col-sm-1">
+            <br>
+            <button class="btn btn-danger" (click)="removeX(ix)"><i class="fa fa-trash"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-sm btn-primary" (click)="addX()">Añadir requerimiento</button>
+  </div>
+      <!-- X End -->
+  <br>
+  <div class="form-row">
+    <div class="col-md-6">
+      <button class="btn btn-sm btn-danger btn-lg btn-block " type="submit" (click)="cancel()">Cancelar</button>
+    </div>
+    <div class="col-md-6">
+      <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (click)="save()" [disabled]="!form.valid">Guardar</button>
+    </div>
+  </div>
+</form>
+

@@ -1,0 +1,61 @@
+<head>
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no,
+     initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  />
+</head>
+<div class="container mt-3">
+
+<div class="container-form">
+  <div class="greeting-title">Verificacion de Requisitos</div>
+  <br />
+  <div class="request-form" id="basic-form">
+    <div class="data-postulant">
+      <label class="postulant"><strong>Postulante: </strong>{{ getFullNamePostulant() }} </label>
+    </div>
+    <div class="thead">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Requisito</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Observaciones</th>
+      </tr>
+    </div>
+    <form class="form" [formGroup]="formStatus">
+      <div class="form-group">
+        <div formArrayName="requestValues"
+          *ngFor="let request of getRequestValues.controls; let i = index">
+          <div [formGroupName]="i">
+            <div class="form-group row">
+              <div class="col-md-1">
+                <label class="field-name" [attr.for]="'state' + i">{{i + 1}}</label>
+              </div>
+              <div class="col-md-7">
+                <label class="field-description" [attr.for]="'state' + i">{{getRequestDescription(i)}}</label>
+              </div>
+              <div class="col-md-2">
+                <input type="checkbox"[attr.id]="'state + i'"formControlName="state" />
+                <label *ngIf="!request.controls.state.value"[style.color]="'#ef1c27d8'"><strong> No cumple</strong></label>
+                <label *ngIf="request.controls.state.value" [style.color]="'#003770'" ><strong>cumple</strong></label>
+              </div>
+              <div class="col-md-2">
+                <input type="text" [attr.id]="'observation' + i" class="form-control" formControlName="observation"/>
+                <div class="text-danger" *ngIf="request.controls.observation.touched && request.controls.observation.invalid">
+                  <small *ngIf="request.controls.observation.errors.maxlength" class="text-danger">Ingrese 1000 caracteres como máximo</small>
+                  <small *ngIf="request.controls.observation.errors.minlength" class="text-danger">Ingrese 5 caracteres como mínimo</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="btns col-md-6 float-right">
+    <button class="btn-cancel" (click)="cancel()">Cancelar</button>
+    <button class="btn-save" (click)="save()">Guardar</button>
+  </div>
+  <br><br>
+</div>
+</div>

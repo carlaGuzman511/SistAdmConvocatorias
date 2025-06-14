@@ -1,0 +1,109 @@
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+   initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<div class="centerCard">
+        <h3 class="container text-center">REGISTRAR EN LIBRO DE RECEPCIÓN DE POSTULANTES</h3>
+        <hr>
+    <div>
+      <b>Convocatoria: </b>
+      <u>{{titleAnnouncement}}</u>
+    </div><br>
+    <div class="form-row">
+        <div id="nameandlastname" class="col-md-6">
+            <b>Nombres y apellidos: </b>
+            <u>{{currentPerson.name}} {{currentPerson.lastName}}</u>
+        </div>
+        <div id="career" class="col-md-6">
+            <b>Carrera: </b> <u>{{careerPerson}}</u>
+        </div>
+    </div>
+    <br>
+    <div class="form-row">
+        <div id="phone" class="col-md-6">
+            <b>Teléfono: </b> <u>{{currentPerson.phoneNumber}}</u>
+        </div>
+        <div id="email" class="col-md-6">
+            <b>E-mail: </b> <u>{{currentPerson.email}}</u>
+        </div>
+    </div>
+    <br>
+    <table class="table table-bordered">
+      <thead class="thead">
+          <tr>
+              <th scope="col">Nombre de auxiliatura</th>
+              <th scope="col">Código</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let aux of auxsPerson; let i = index ">
+              <td>{{aux.name}}</td>
+              <td>{{aux.code}}</td>
+          </tr>
+      </tbody>
+  </table>
+
+    <hr>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="number_docs">Nro. Documentos</label>
+                <input type="tel" class="form-control" required formControlName="number_docs" />
+                <div class="text-danger"
+                    *ngIf="registerForm.controls.number_docs.touched && registerForm.controls.number_docs.invalid">
+                    <div *ngIf="registerForm.controls.number_docs.errors.required">El número de documentos es requerido</div>
+                    <div *ngIf="registerForm.controls.number_docs.errors.pattern"> Ingresa sólo números</div>
+                    <div *ngIf="registerForm.controls.number_docs.errors.maxlength"> Ingresa 3 números como máximo</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+              <label for="deliveryDate">Fecha</label>
+              <input type="date" formControlName="deliveryDate" class="form-control" min="{{today | date:'yyyy-MM-dd'}}" max="{{today | date:'yyyy-MM-dd'}}">
+              <div class="text-danger"
+                *ngIf="registerForm.controls.deliveryDate.touched && registerForm.controls.deliveryDate.invalid">
+                <div *ngIf="registerForm.controls.deliveryDate.errors.required">La fecha es requerida</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="deliveryTime">Hora</label>
+              <input type="time" formControlName="deliveryTime" class="form-control" placeholder="00:00">
+              <div class="text-danger"
+                *ngIf="registerForm.controls.deliveryTime.touched && registerForm.controls.deliveryTime.invalid">
+              <div *ngIf="registerForm.controls.deliveryTime.errors.required">La hora de entrega es requerida</div>
+              </div>
+            </div>
+        </div>
+        <br>
+        <div formArrayName="notes">
+          <div *ngFor="let Y of registerForm['controls'].notes['controls']; let iy=index">
+            <div formGroupName="{{iy}}">
+                <b>Observación</b>
+              <div class="form-group row">
+                <div class="col-md-11">
+                  <textarea type="text" class="form-control" formControlName="note"  [ngClass]="{'form-control': true,
+                  'is-invalid': Y.controls.note.invalid && Y.controls.note.touched,
+                  'is-valid': Y.controls.note.valid}"></textarea>
+                  <small *ngIf="Y.controls.note.errors?.required && Y.controls.note.touched" class="form-text custom-invalid-feedback">Ingrese una observación o elimine el campo</small>
+                  <small *ngIf="Y.controls.note.errors?.maxlength && Y.controls.note.touched" class="form-text custom-invalid-feedback">Ingrese 2000 caracteres como máximo</small>
+                  <small *ngIf="Y.controls.note.errors?.minlength && Y.controls.note.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+                </div>
+                <div class="col-md-1">
+                  <button class="btn btn-danger" (click)="removeY(iy)"><i class="fa fa-trash"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--<button class="btn btn-sm btn-primary" (click)="addY()">Añadir nota</button>-->
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <button [routerLink]="['/secretario']" routerLinkActive="router-link-active" class="btn btn-sm btn-danger btn-lg btn-block" type="button" data-toggle="modal" data-target="#cancel">Atrás</button>
+            </div>
+            <div class="form-group col-md-6">
+                <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (onClick)="onSubmit()" [disabled]="!registerForm.valid">Registrar</button>
+            </div>
+        </div>
+    </form>
+</div>

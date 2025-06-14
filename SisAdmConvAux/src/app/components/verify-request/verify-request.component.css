@@ -1,0 +1,76 @@
+
+td {
+  font-size: 18px;
+}
+.postulant{
+  font-size: 24px;
+}
+
+.greeting-title {
+  color: #003770;
+  font-size: 50px;
+  text-align: center;
+  grid-column-start: 2;
+  grid-column-end: -1;
+  grid-row-start: 4;
+  grid-row-end: 4;
+}
+.thead >tr{
+  display: grid;
+  grid-template-columns: 1fr 7fr 2fr 2fr;
+  font-size: 18px;
+  margin:15px;
+
+}
+.btn-print {
+  float: right;
+}
+.state{
+  font-size: 10px;
+}
+.field-description{
+  font-size: 18px;
+}
+.data-postulant{
+  text-align: justify;
+}
+.btn-save {
+  border: #003770;
+  border-radius: 3px;
+  background-color: #003770;
+  color: aliceblue;
+  font-size: 20px;
+  padding: 5px;
+  top: 50%;
+  width: 300px;
+
+}
+.btn-cancel {
+  border: #ef1c25;
+  border-radius: 3px;
+  background-color: #ef1c25;
+  color: aliceblue;
+  font-size: 20px;
+  padding: 5px;
+  top: 50%;
+  width: 300px;
+ 
+}
+input[type="checkbox"]{
+  width: 20px;
+  height: 20px;  
+}
+input >label{
+  font-size: 16px;
+  color: #ef1c25;
+} 
+.btns {
+  display: grid;
+ grid-template-columns: 5fr 5fr; 
+}
+.btns >button{
+margin-right: 20px;
+}
+.container-form{
+  margin-bottom: 50px;
+}

@@ -1,0 +1,111 @@
+.greeting-title {
+  color: #003770;
+  font-size: 50px;
+  text-align:center;
+  grid-column-start: 1;
+  grid-column-end: -1;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+.academic-unit{
+  color: black;
+  font-size: 20px;
+  grid-column-start: 2;
+  grid-column-end: -1;
+  grid-row-start: 3;
+  grid-row-end: 3;
+}
+.title{
+  color: black;
+  text-align:center;
+  font-size: 20px;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
+.area{
+  color: black;
+  font-size: 20px;
+  grid-column-start: 2;
+  grid-column-end: -1;
+  grid-row-start: 4;
+  grid-row-end: 4;
+}
+.management{
+  color: black;
+  font-size: 20px;
+  grid-column-start: 2;
+  grid-column-end: -1;
+  grid-row-start: 5;
+  grid-row-end: 5;
+}
+.searchbox{
+  font-size: 20px;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 6;
+  grid-row-end: 6;
+}
+.table{
+  font-size: 20px;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  grid-row-start: 7;
+  grid-row-end: 7;
+  width: 100%;
+}
+.thead{
+  background-color: #003770;
+  color: aliceblue;
+}
+.select-container{
+  width: 50%;
+  left: 500%;
+  color: #003770;
+  font-size: 30px;
+}
+.postulant-table-container {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 10% 65% 15% 10%;
+  grid-template-rows: 20% 25% 8% 8% 8% 15% 40%;
+}
+.review-merits {
+  border: #003770;
+  border-radius: 3px;
+  background-color: #003770;
+  color: aliceblue;
+  font-size: 20px;
+}
+.download{
+  border: #003770;
+  border-radius: 3px;
+  background-color: #003770;
+  color: aliceblue;
+  font-size: 18px;
+  grid-column-start: 3;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 3;
+}
+.downloadExcel{
+  border: #003770;
+  border-radius: 3px;
+  background-color: #003770;
+  color: aliceblue;
+  font-size: 18px;
+  grid-column-start: 3;
+  grid-column-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 5;
+}
+.search-hero {
+  position: relative;
+  padding-bottom: 50px;
+  margin: auto;
+  right: 10%;
+  left: 10%;
+  top: 10px;
+}

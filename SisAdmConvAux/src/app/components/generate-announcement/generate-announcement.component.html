@@ -1,0 +1,91 @@
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+   initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<form class="label-form" style="width:100%;" [formGroup]="form">
+<br>
+<h3 class="container text-center">CREAR CONVOCATORIA</h3>
+<hr>
+<div class="form-group row">
+  <div class="col-sm-2">
+    <label for="year">Gestión</label>
+    <input type="text" class="form-control" formControlName="year"  [ngClass]="{'form-control': true,
+    'is-invalid': form.controls.year.invalid && form.controls.year.touched,
+    'is-valid': form.controls.year.valid}">
+    <small *ngIf="form.controls.year.errors?.required && form.controls.year.touched" class="form-text custom-invalid-feedback">Ingrese la gestión</small>
+    <small *ngIf="form.controls.year.errors?.maxlength && form.controls.year.touched" class="form-text custom-invalid-feedback">Ingrese 4 números como máximo</small>
+    <small *ngIf="form.controls.year.errors?.pattern && form.controls.year.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+  </div>
+  <div class="col-sm-2">
+    <label for="area" class="field">Área</label>
+    <select id="area" class="selectpicker" data-live-search="true" formControlName="area" [ngClass]="{'form-control': true,
+      'is-invalid': form.controls.area.invalid && form.controls.area.touched,
+      'is-valid': form.controls.area.valid}">
+      <option *ngFor="let item of areas" data-tokens="item.name"value={{item.idarea}}>{{item.name}}</option>
+    </select>
+    <small *ngIf="form.controls.area.invalid && form.controls.area.touched" class="form-text custom-invalid-feedback">Seleccione un área</small>
+  </div>
+  <div class="col-sm-4">
+    <label for="academicUnit" class="field">Unidad Académica</label>
+    <select id="inputState" class="selectpicker" data-live-search="true" formControlName="academicUnit" [ngClass]="{'form-control': true,
+      'is-invalid': form.controls.academicUnit.invalid && form.controls.academicUnit.touched,
+      'is-valid': form.controls.academicUnit.valid}">
+      <option *ngFor="let item of academicUnits" data-tokens="item.name"value={{item.idacademicunit}}>{{item.name}}</option>
+    </select>
+    <small *ngIf="form.controls.academicUnit.invalid && form.controls.academicUnit.touched" class="form-text custom-invalid-feedback">Seleccione una unidad académica</small>
+  </div>
+  <div class="col-sm-4">
+    <label for="faculty" class="field">Facultad</label>
+    <select id="inputState" class="selectpicker" data-live-search="true" formControlName="faculty" [ngClass]="{'form-control': true,
+      'is-invalid': form.controls.faculty.invalid && form.controls.faculty.touched,
+      'is-valid': form.controls.faculty.valid}">
+      <option *ngFor="let item of falculties" data-tokens="item.name"value={{item.idfaculty}}>{{item.name}}</option>
+    </select>
+    <small *ngIf="form.controls.faculty.invalid && form.controls.faculty.touched" class="form-text custom-invalid-feedback">Seleccione una facultad</small>
+  </div>
+</div>
+<div class="col-sm-12">
+  <label for="title">Título</label>
+  <input type="text" class="form-control" formControlName="title"  [ngClass]="{'form-control': true,
+  'is-invalid': form.controls.title.invalid && form.controls.title.touched,
+  'is-valid': form.controls.title.valid}">
+  <small *ngIf="form.controls.title.errors?.required && form.controls.title.touched" class="form-text custom-invalid-feedback">El título es requerido</small>
+  <small *ngIf="form.controls.title.errors?.maxlength && form.controls.title.touched" class="form-text custom-invalid-feedback">Ingrese 255 caracteres como máximo</small>
+  <small *ngIf="form.controls.title.errors?.minlength && form.controls.title.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+</div>
+<br>
+<label for="description" class="field">Descripción</label>
+  <textarea  type="text" class="form-control" formControlName="description"[ngClass]="{'form-control': true,
+  'is-invalid': form.controls.description.invalid && form.controls.description.touched,
+  'is-valid': form.controls.description.valid}"></textarea>
+  <small *ngIf="form.controls.description.errors?.required && form.controls.description.touched" class="form-text custom-invalid-feedback">La descripción es requerida</small>
+  <small *ngIf="form.controls.description.errors?.maxlength && form.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese 1000 caracteres como máximo</small>
+  <small *ngIf="form.controls.description.errors?.minlength && form.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+  <br>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" formControlName="pack">
+    <label class="form-check-label" for="pack">¿Generar un solo rótulo para postularse a más de una auxiliaturas?</label>
+  </div>
+<hr>
+  <div>
+    <label for="ofAppointment">Del nombramiento</label>
+    <textarea  type="text" class="form-control" formControlName="ofAppointment"[ngClass]="{'form-control': true,
+    'is-invalid': form.controls.ofAppointment.invalid && form.controls.ofAppointment.touched,
+    'is-valid': form.controls.ofAppointment.valid}"></textarea>
+    <small *ngIf="form.controls.ofAppointment.errors?.required && form.controls.ofAppointment.touched" class="form-text custom-invalid-feedback">La descripción es requerida</small>
+    <small *ngIf="form.controls.ofAppointment.errors?.maxlength && form.controls.ofAppointment.touched" class="form-text custom-invalid-feedback">Ingrese 1000 caracteres como máximo</small>
+    <small *ngIf="form.controls.ofAppointment.errors?.minlength && form.controls.ofAppointment.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+  </div>
+    <hr>
+    <br>
+<div class="form-row">
+  <div class="col-md-6">
+    <button class="btn btn-sm btn-danger btn-lg btn-block " type="submit" (click)="cancel()">Cancelar</button>
+  </div>
+  <div class="col-md-6">
+    <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (click)="save()" [disabled]="!form.valid">Guardar</button>
+  </div>
+</div>
+</form>
+

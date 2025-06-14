@@ -1,0 +1,71 @@
+.greeting-title {
+  color: #003770;
+  font-size: 50px;
+  text-align: center;
+  grid-column-start: 1;
+  grid-column-end: -1;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
+
+.form {
+   position: relative;
+}
+
+#descriptionEval {
+  padding: 15px;
+  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 65%;
+  transform: translate(-15%, -110%);
+}
+
+.table-container {
+  top: 20%;
+  left: 5%;
+  right: 0;
+  width: 90%;
+  border: 0px;
+}
+
+.btn-save {
+  border: #003770;
+  border-radius: 3px;
+  background-color: #003770;
+  color: aliceblue;
+  font-size: 20px;
+  padding: 5px;
+  width: 300px;
+}
+
+.btn-add {
+  border: #003770;
+  border-radius: 10px;
+  background-color: #003770;
+  color: aliceblue;
+  font-size: 15px;
+  padding: 5px;
+  width: 150px;
+  margin-top: 5px;
+}
+
+.btn-delete {
+  border: #ef1c25;
+  border-radius: 10px;
+  background-color: #ef1c25;
+  color: aliceblue;
+  font-size: 15px;
+  padding: 5px;
+  width: 150px;
+}
+
+.btn-cancel {
+  border: #ef1c25;
+  border-radius: 3px;
+  background-color: #ef1c25;
+  color: aliceblue;
+  font-size: 20px;
+  padding: 5px;
+  width: 300px;
+}

@@ -1,0 +1,131 @@
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+   initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<form class="label-form" style="width:100%;" [formGroup]="form">
+<br>
+<h3 class="container text-center">CURRÍCULUM VITAE</h3>
+<hr>
+<div>
+  <h5 class="container text-center">DATOS PERSONALES</h5>
+  <hr>
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label for="name">Nombre</label>
+      <input type="text" class="form-control" formControlName="name"  [ngClass]="{'form-control': true,
+      'is-invalid': form.controls.name.invalid && form.controls.name.touched,
+      'is-valid': form.controls.name.valid}">
+      <small *ngIf="form.controls.name.errors?.required && form.controls.name.touched" class="form-text custom-invalid-feedback">Su nombre es requerido</small>
+      <small *ngIf="form.controls.name.errors?.maxlength && form.controls.name.touched" class="form-text custom-invalid-feedback">Ingrese 50 caracteres como máximo</small>
+      <small *ngIf="form.controls.name.errors?.minlength && form.controls.name.touched" class="form-text custom-invalid-feedback">Ingrese 3 caracteres como mínimo</small>
+      <small *ngIf="form.controls.name.errors?.pattern && form.controls.name.touched" class="form-text custom-invalid-feedback">Ingrese sólo letras</small>
+    </div>
+    <div class="col-md-6">
+      <label for="surname">Apellidos</label>
+      <input type="text" class="form-control" formControlName="surname"  [ngClass]="{'form-control': true,
+      'is-invalid': form.controls.surname.invalid && form.controls.surname.touched,
+      'is-valid': form.controls.surname.valid}">
+      <small *ngIf="form.controls.surname.errors?.required && form.controls.surname.touched" class="form-text custom-invalid-feedback">Sus apellidos son requerido</small>
+      <small *ngIf="form.controls.surname.errors?.maxlength && form.controls.surname.touched" class="form-text custom-invalid-feedback">Ingrese 50 caracteres como máximo</small>
+      <small *ngIf="form.controls.surname.errors?.minlength && form.controls.surname.touched" class="form-text custom-invalid-feedback">Ingrese 3 caracteres como mínimo</small>
+      <small *ngIf="form.controls.surname.errors?.pattern && form.controls.surname.touched" class="form-text custom-invalid-feedback">Ingrese sólo letras</small>
+    </div>
+ </div>
+  <div class="form-group row">
+    <div class="col-md-3">
+      <label for="ci">Carnet de Identidad</label>
+      <input type="text" class="form-control" formControlName="ci"  [ngClass]="{'form-control': true,
+      'is-invalid': form.controls.ci.invalid && form.controls.ci.touched,
+      'is-valid': form.controls.ci.valid}">
+      <small *ngIf="form.controls.ci.errors?.required && form.controls.ci.touched" class="form-text custom-invalid-feedback">Su número de carnet de identidad es requerido es requerido</small>
+      <small *ngIf="form.controls.ci.errors?.maxlength && form.controls.ci.touched" class="form-text custom-invalid-feedback">Ingrese 8 caracteres como máximo</small>
+      <small *ngIf="form.controls.ci.errors?.minlength && form.controls.ci.touched" class="form-text custom-invalid-feedback">Ingrese 7 caracteres como mínimo</small>
+      <small *ngIf="form.controls.ci.errors?.pattern && form.controls.ci.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+    </div>
+    <div class="col-md-3">
+      <label for="address">Teléfono</label>
+      <input type="tel" class="form-control" formControlName="phone"  [ngClass]="{'form-control': true,
+      'is-invalid': form.controls.phone.invalid && form.controls.phone.touched,
+      'is-valid': form.controls.phone.valid}">
+      <small *ngIf="form.controls.phone.errors?.required && form.controls.phone.touched" class="form-text custom-invalid-feedback">Sus número de teléfono es requerido</small>
+      <small *ngIf="form.controls.phone.errors?.maxlength && form.controls.phone.touched" class="form-text custom-invalid-feedback">Ingrese 13 caracteres como máximo</small>
+      <small *ngIf="form.controls.phone.errors?.minlength && form.controls.phone.touched" class="form-text custom-invalid-feedback">Ingrese 7 caracteres como mínimo</small>
+      <small *ngIf="form.controls.ci.errors?.pattern && form.controls.ci.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+    </div>
+    <div class="col-md-6">
+      <label for="address">Dirección</label>
+      <input type="text" class="form-control" formControlName="address"  [ngClass]="{'form-control': true,
+      'is-invalid': form.controls.address.invalid && form.controls.address.touched,
+      'is-valid': form.controls.address.valid}">
+      <small *ngIf="form.controls.address.errors?.required && form.controls.address.touched" class="form-text custom-invalid-feedback">Sus direccipon es requerida</small>
+      <small *ngIf="form.controls.address.errors?.maxlength && form.controls.address.touched" class="form-text custom-invalid-feedback">Ingrese 255 caracteres como máximo</small>
+      <small *ngIf="form.controls.address.errors?.minlength && form.controls.address.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-md-6">
+      <label for="birthdate">Fecha de Nacimiento</label>
+      <input type="date" class="form-control" formControlName="birthdate"  [ngClass]="{'form-control': true,
+      'is-invalid': form.controls.birthdate.invalid && form.controls.birthdate.touched,
+      'is-valid': form.controls.birthdate.valid}">
+      <small *ngIf="form.controls.birthdate.errors?.required && form.controls.birthdate.touched" class="form-text custom-invalid-feedback">Su fecha de nacimiento es requerido</small>
+    </div>
+    <div class="col-md-6">
+      <label for="email">E-mail</label>
+      <input type="email" class="form-control" formControlName="email"  [ngClass]="{'form-control': true,
+      'is-invalid': form.controls.email.invalid && form.controls.email.touched,
+      'is-valid': form.controls.email.valid}">
+      <small *ngIf="form.controls.email.errors?.required && form.controls.email.touched" class="form-text custom-invalid-feedback">Su e-mail es requerido</small>
+      <small *ngIf="form.controls.email.errors?.maxlength && form.controls.email.touched" class="form-text custom-invalid-feedback">Ingrese 70 caracteres como máximo</small>
+      <small *ngIf="form.controls.email.errors?.minlength && form.controls.email.touched" class="form-text custom-invalid-feedback">Ingrese 6 caracteres como mínimo</small>
+      <small *ngIf="form.controls.email.errors?.email && form.controls.email.touched" class="form-text custom-invalid-feedback">Ingrese un e-mail válido</small>
+    </div>
+ </div>
+  <br>
+  <h5 class="container text-center">RENDIMIENTO ACADÉMICO</h5>
+  <hr><!--{{merits[0].description}}-->
+  <div *ngFor="let detail of details; let i = index ">
+    <div *ngFor="let subdetail of details[i]; let y = index">
+      <b>{{subdetail.description}}</b>
+      <hr>
+      <div *ngFor="let subd of subdetails; let z = index ">
+        <div *ngFor="let item of subdetails[z]">
+          <div *ngIf="item.subdetailMerit.idsubdetailmerit === subdetail.idsubdetailmerit">
+            <label> - {{item.description}}</label>
+            <div formArrayName="requests">
+              <div *ngFor="let X of form['controls'].requests['controls']; let ix=index">
+                <div formGroupName="{{ix}}" class="Xs">
+                  <div class="form-group row">
+                    <div class="col-md-11">
+                      <input type="text" class="form-control" formControlName="requisito"  [ngClass]="{'form-control': true,
+                      'is-invalid': X.controls.requisito.invalid && X.controls.requisito.touched,
+                      'is-valid': X.controls.requisito.valid}">
+                      <small *ngIf="X.controls.requisito.errors?.required && X.controls.requisito.touched" class="form-text custom-invalid-feedback">El campo es requerido o puede eliminarlo</small>
+                      <small *ngIf="X.controls.requisito.errors?.maxlength && X.controls.requisito.touched" class="form-text custom-invalid-feedback">Ingrese 2000 caracteres como máximo</small>
+                      <small *ngIf="X.controls.requisito.errors?.minlength && X.controls.requisito.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+                    </div>
+                    <div class="col-md-1">
+                      <button class="btn btn-danger" (click)="removeX(ix)"><i class="fa fa-trash"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-sm btn-primary" (click)="addX()">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="form-row">
+  <div class="col-md-6">
+    <button class="btn btn-sm btn-danger btn-lg btn-block ">Cancelar</button>
+  </div>
+  <div class="col-md-6">
+    <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (click)="save()">Guardar</button>
+  </div>
+</div>
+</form>

@@ -1,0 +1,77 @@
+.container{
+  text-align: center;
+ }
+
+.col-form-label{
+    margin-top: 10px;;
+}
+
+
+.field {
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+}
+
+.thead{
+  background-color:#003770;
+  color: aliceblue;
+  font-size: 20px;
+}
+.container{
+ text-align: center;
+}
+td{
+  font-size: 18px;
+}
+  .greeting-title {
+    color: #003770;
+    font-size: 50px;
+    text-align:center;
+    grid-column-start: 2;
+    grid-column-end: -1;
+    grid-row-start: 4;
+    grid-row-end: 4;
+  }
+  .table{
+    font-size: 20px;
+    grid-column-start: 2;
+    grid-column-end: 6;
+    grid-row-start: 5;
+    grid-row-end: 5;
+    width: 100%;
+  }
+   
+  
+  .asign,.review{
+    border: #003770;
+    border-radius: 3px;
+    background-color: #003770;
+    color: aliceblue;
+    font-size: 20px;
+    margin:5px;
+   }
+   .asign{
+    width:150px;
+   }
+   .btn-print{
+     margin-bottom: 20px;
+   }
+   .btnsPrint >.btn-print{
+    float: right;
+    border: #003770;
+    background-color:aliceblue;
+    border-radius: 3px;
+    width: 200px;
+    margin:5px;
+  }
+  .btn-primary{
+    margin-right: 15px;
+  }
+ 
+  .infoAssignItem > div{
+ display: inline-block;
+ font-size: 18px;
+  }
+.content-evaluation{
+  background-color: #d1dae3;
+}

@@ -1,0 +1,41 @@
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+     initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  </head>
+
+  <div class="container">
+      <button type="button" class="btn" (click)="goBack()">Volver</button> <br> <br>      
+    <div class="greeting-title">Detalles de Resultados de Conocimientos</div>
+    <div class="containerDetails">
+    <div class="postulant">
+        <label class="postulant"><strong>Postulante: </strong>{{writtenEvaluation.postulantes.person.name}} {{ writtenEvaluation.postulantes.person.lastName}}  &nbsp; &nbsp; </label>
+        <label class="area"><strong>Area: </strong>{{writtenEvaluation.auxiliary.area.name}}</label><br>
+        <label class="aux"><strong>Auxiliatura: </strong>{{writtenEvaluation.auxiliary.name}}</label><br>
+    </div>
+      <table class="table table-hover" id="basic-table">
+        <thead class="thead">
+          <tr>
+            <th scope="col">A: Prueba Escrita /100</th>
+            <th scope="col"> % A</th>
+            <th scope="col">Total A</th>
+            <th scope="col">B: Prueba Oral /100</th>
+            <th scope="col"> % B</th>
+            <th scope="col">Total B</th>
+            <th scope="col">TOTAL: totalA + totalB</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td>{{writtenEvaluation.score| number:'2.0-2'}}</td>
+              <td>{{writtenEvaluation.knowledgeEvaluation.percentage | number:'2.0-2'}}</td>
+              <td  [style.color]="'#003770'">{{writtenEvaluation.score * (+writtenEvaluation.knowledgeEvaluation.percentage/100)| number:'2.0-2'}}</td>
+              <td>{{oralEvaluation.score| number:'2.0-2'}}</td>
+              <td>{{oralEvaluation.knowledgeEvaluation.percentage | number:'2.0-2'}}</td>
+              <td [style.color]="'#003770'">{{oralEvaluation.score * (+oralEvaluation.knowledgeEvaluation.percentage/100) | number:'2.0-2'}}</td>
+              <td>{{(writtenEvaluation.score * (+writtenEvaluation.knowledgeEvaluation.percentage/100)) + (oralEvaluation.score * (+oralEvaluation.knowledgeEvaluation.percentage/100)) | number:'2.0-2'}}</td>
+           </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

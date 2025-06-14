@@ -1,0 +1,67 @@
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+   initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<form class="label-form" style="width:100%;" [formGroup]="form">
+<br>
+<h3 class="container text-center">FECHA LÍMITE DE ENTREGA DE DOCUMENTOS</h3>
+<hr>
+<div formArrayName="descriptions">
+  <div *ngFor="let Y of form['controls'].descriptions['controls']; let iy=index">
+    <div formGroupName="{{iy}}">
+        <label for="description">Descripción</label>
+      <div class="form-group row">
+        <div class="col-md-11">
+          <textarea type="text" class="form-control" formControlName="description"  [ngClass]="{'form-control': true,
+          'is-invalid': Y.controls.description.invalid && Y.controls.description.touched,
+          'is-valid': Y.controls.description.valid}"></textarea>
+          <small *ngIf="Y.controls.description.errors?.required && Y.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese una descripción o elimine el campo</small>
+          <small *ngIf="Y.controls.description.errors?.maxlength && Y.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese 2000 caracteres como máximo</small>
+          <small *ngIf="Y.controls.description.errors?.minlength && Y.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-danger" (click)="removeY(iy)"><i class="fa fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--<button class="btn btn-sm btn-primary" (click)="addY()">Añadir nota</button>-->
+</div>
+  <label for="deliveryplace" class="field">Lugar de entrega</label>
+  <input  type="text" class="form-control" formControlName="deliveryplace"[ngClass]="{'form-control': true,
+   'is-invalid': form.controls.deliveryplace.invalid && form.controls.deliveryplace.touched,
+   'is-valid': form.controls.deliveryplace.valid}">
+    <small *ngIf="form.controls.deliveryplace.errors?.required && form.controls.deliveryplace.touched" class="form-text custom-invalid-feedback">El lugar de entrega es requerido</small>
+    <small *ngIf="form.controls.deliveryplace.errors?.maxlength && form.controls.deliveryplace.touched" class="form-text custom-invalid-feedback">Ingrese 255 caracteres como máximo</small>
+    <small *ngIf="form.controls.deliveryplace.errors?.minlength && form.controls.deliveryplace.touched" class="form-text custom-invalid-feedback">Ingrese 5 caracteres como mínimo</small>
+    <br>
+  <div class="form-row">
+    <div class="col-md-6">
+      <label for="deliverydate">Fecha límite</label>
+      <input type="date" formControlName="deliverydate" class="form-control" min="{{today | date:'yyyy-MM-dd'}}">
+      <div class="text-danger"
+        *ngIf="form.controls.deliverydate.touched && form.controls.deliverydate.invalid">
+      <div *ngIf="form.controls.deliverydate.errors.required">La fecha es requerida</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="deliverytime">Hora</label>
+      <input type="time" formControlName="deliverytime" class="form-control" placeholder="00:00">
+      <div class="text-danger"
+        *ngIf="form.controls.deliverytime.touched && form.controls.deliverytime.invalid">
+      <div *ngIf="form.controls.deliverytime.errors.required">La hora es requerida</div>
+      </div>
+    </div>
+  </div>
+<br>
+<div class="form-row">
+  <div class="col-md-6">
+    <button class="btn btn-sm btn-danger btn-lg btn-block " type="submit" (click)="cancel()">Cancelar</button>
+  </div>
+  <div class="col-md-6">
+    <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (click)="save()" [disabled]="!form.valid">Guardar</button>
+  </div>
+</div>
+</form>
+

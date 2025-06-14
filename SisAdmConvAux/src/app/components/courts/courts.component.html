@@ -1,0 +1,103 @@
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+   initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<form class="label-form" style="width:100%;" [formGroup]="form">
+<br>
+<h3 class="container text-center">TRIBUNALES</h3>
+<hr>
+<!-- X -->
+<div formArrayName="descriptions">
+  <div *ngFor="let Q of form['controls'].descriptions['controls']; let iq=index">
+    <div formGroupName="{{iq}}">
+      <div class="form-group row">
+        <div class="col-md-11">
+          <label for="description">Descripción</label>
+          <textarea type="text" class="form-control" formControlName="description"  [ngClass]="{'form-control': true,
+          'is-invalid': Q.controls.description.invalid && Q.controls.description.touched,
+          'is-valid': Q.controls.description.valid}"></textarea>
+          <small *ngIf="Q.controls.description.errors?.required && Q.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese una descripción o elimine el campo</small>
+          <small *ngIf="Q.controls.description.errors?.maxlength && Q.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese 1000 caracteres como máximo</small>
+          <small *ngIf="Q.controls.description.errors?.minlength && Q.controls.description.touched" class="form-text custom-invalid-feedback">Ingrese 10 caracteres como mínimo</small>
+        </div>
+        <div class="col-md-1">
+          <br>
+          <button class="btn btn-danger" (click)="removeX(iq)"><i class="fa fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<b>COMISIÓN DE MÉRITOS</b>
+<hr>
+<div class="form-row">
+  <br>
+  <div class="col-md-4">
+    <label for="teachersMerit" class="field">Cantidad de docentes</label>
+  </div>
+  <div class="col-md-1">
+    <input  type="text" class="form-control" formControlName="teachersMerit"[ngClass]="{'form-control': true,
+   'is-invalid': form.controls.teachersMerit.invalid && form.controls.teachersMerit.touched,
+   'is-valid': form.controls.teachersMerit.valid}">
+    <small *ngIf="form.controls.teachersMerit.errors?.required && form.controls.teachersMerit.touched" class="form-text custom-invalid-feedback">El campo es requerido</small>
+    <small *ngIf="form.controls.teachersMerit.errors?.maxlength && form.controls.teachersMerit.touched" class="form-text custom-invalid-feedback">Ingrese números de máximo 2 dígitos</small>
+    <small *ngIf="form.controls.teachersMerit.errors?.pattern && form.controls.teachersMerit.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+    <br>
+  </div>
+  <div class="col-md-2"></div>
+  <div class="col-md-4">
+    <label for="studentDelegateMerit" class="field">Cantidad de estudiantes delegados</label>
+  </div>
+  <div class="col-md-1">
+    <input  type="text" class="form-control" formControlName="studentDelegateMerit"[ngClass]="{'form-control': true,
+   'is-invalid': form.controls.studentDelegateMerit.invalid && form.controls.studentDelegateMerit.touched,
+   'is-valid': form.controls.studentDelegateMerit.valid}">
+    <small *ngIf="form.controls.studentDelegateMerit.errors?.required && form.controls.studentDelegateMerit.touched" class="form-text custom-invalid-feedback">El campo es requerido</small>
+    <small *ngIf="form.controls.studentDelegateMerit.errors?.maxlength && form.controls.studentDelegateMerit.touched" class="form-text custom-invalid-feedback">Ingrese números de máximo 2 dígitos</small>
+    <small *ngIf="form.controls.studentDelegateMerit.errors?.pattern && form.controls.studentDelegateMerit.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+    <br>
+  </div>
+</div>
+<b>COMISIÓN DE CONOCIMIENTOS</b>
+<hr>
+<b>Nota: </b> <label for="note">Debe considerar asignar por lo menos un docente por asignatura o temática más un estudiante veedor.</label>
+<hr>
+<div class="form-row">
+  <br>
+  <div class="col-md-4">
+    <label for="teachersKnoledge" class="field">Cantidad de docentes</label>
+  </div>
+  <div class="col-md-1">
+    <input  type="text" class="form-control" formControlName="teachersKnoledge"[ngClass]="{'form-control': true,
+   'is-invalid': form.controls.teachersKnoledge.invalid && form.controls.teachersKnoledge.touched,
+   'is-valid': form.controls.teachersKnoledge.valid}">
+    <small *ngIf="form.controls.teachersKnoledge.errors?.required && form.controls.teachersKnoledge.touched" class="form-text custom-invalid-feedback">El campo es requerido</small>
+    <small *ngIf="form.controls.teachersKnoledge.errors?.maxlength && form.controls.teachersKnoledge.touched" class="form-text custom-invalid-feedback">Ingrese números de máximo 2 dígitos</small>
+    <small *ngIf="form.controls.teachersKnoledge.errors?.pattern && form.controls.teachersKnoledge.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+    <br>
+  </div>
+  <div class="col-md-2"></div>
+  <div class="col-md-4">
+    <label for="studentDelegateKnoledge" class="field">Cantidad de estudiantes veedores</label>
+  </div>
+  <div class="col-md-1">
+    <input  type="text" class="form-control" formControlName="studentDelegateKnoledge"[ngClass]="{'form-control': true,
+   'is-invalid': form.controls.studentDelegateKnoledge.invalid && form.controls.studentDelegateKnoledge.touched,
+   'is-valid': form.controls.studentDelegateKnoledge.valid}">
+    <small *ngIf="form.controls.studentDelegateKnoledge.errors?.required && form.controls.studentDelegateKnoledge.touched" class="form-text custom-invalid-feedback">El campo es requerido</small>
+    <small *ngIf="form.controls.studentDelegateKnoledge.errors?.maxlength && form.controls.studentDelegateKnoledge.touched" class="form-text custom-invalid-feedback">Ingrese números de máximo 2 dígitos</small>
+    <small *ngIf="form.controls.studentDelegateKnoledge.errors?.pattern && form.controls.studentDelegateKnoledge.touched" class="form-text custom-invalid-feedback">Ingrese sólo números</small>
+    <br>
+  </div>
+</div>
+<div class="form-row">
+  <div class="col-md-6">
+    <button class="btn btn-sm btn-danger btn-lg btn-block " type="submit" (click)="cancel()">Cancelar</button>
+  </div>
+  <div class="col-md-6">
+    <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (click)="save()" [disabled]="!form.valid">Guardar</button>
+  </div>
+</div>
+</form>
+

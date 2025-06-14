@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+
+.btn-primary, .btn-primary:visited, .btn-primary:active {
+    background-color: #003770 !important;
+    border-color: #003770 !important;
+}
+
+.btn-primary:hover {
+    background-color: #003670d5 !important;
+    border-color: #003670d5 !important;
+}
+
+.btn-secondary, .btn-secondary:visited, .btn-secondary:active {
+    background-color: #ef1c25 !important;
+    border-color: #ef1c25 !important;
+}
+
+.btn-secondary:hover {
+    background-color: #ef1c27d8 !important;
+    border-color: #ef1c27d8 !important;
+}
+
+.btnleft {
+    width: 30% !important;
+    margin-right: 20% !important;
+}
+
+.btnright {
+    width: 30% !important;
+    margin-left: 20% !important;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

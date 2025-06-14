@@ -1,0 +1,38 @@
+.bg {
+    /* The image used */
+    /* background-image: url("../../../assets/images/rectorado1-1140x400.jpg"); */
+    background-color: #003770;
+    /* opacity: 0.2; */
+  
+    /* Full height */
+    height: 100%;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+.centerCard {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    right: 10%;
+    width: 80%;
+    border: 0px;
+  }
+
+.postulant-table-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 50% 10% 10%;
+    grid-gap: 25px;
+}
+
+.greeting-title {
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: -1;
+    grid-row-start: 1;
+    grid-row-end: 1;
+}

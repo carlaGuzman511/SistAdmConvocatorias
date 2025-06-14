@@ -1,0 +1,42 @@
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+     initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  </head>
+  <div class="container">
+    <button type="button" class="btn" (click)="goBack()">Volver</button> <br> <br>
+    <div class="greeting-title">Resultados de Conocimientos</div>
+    <div class="containerDetails">
+      <div class="btnsPrint" >
+        <button type="button" class="btn btn-print " (click)="pdfTable()">Generar PDF</button>
+        <button (click)="tableToExcel('basic-table', 'laboratorioConocimiento')"class="btn btn-print">Generar Excel</button>      
+      </div> 
+    <div class="postulant">
+        <label class="post"><strong>Postulante: </strong>{{labEvaluation[0].postulantes.person.name }} {{labEvaluation[0].postulantes.person.lastName }} &nbsp; &nbsp; &nbsp;</label>
+        <label class="area"><strong>Area: </strong>{{labEvaluation[0].laboratoryEvaluation.auxiliary.area.name}}</label><br>
+        <label class="aux"><strong>Auxiliatura: </strong>{{labEvaluation[0].laboratoryEvaluation.auxiliary.name}}</label><br>
+    </div>
+      <table class="table table-hover" id="basic-table">
+        <thead class="thead">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tematica</th>
+            <th scope="col">Nota</th>
+            <th scope="col">Porcentaje</th>
+            <th scope="col">Nota  Porcentaje </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let resLab of labEvaluation ; let indice=index">
+            <tr>
+              <td>{{indice+1}}</td>
+              <td>{{resLab.laboratoryEvaluation.thematic.name}}</td>
+              <td>{{resLab.score | number:'2.0-2'}}</td>
+              <td>{{resLab.laboratoryEvaluation.percentage}} </td>
+              <td>{{resLab.score * (+resLab.laboratoryEvaluation.percentage/100)| number:'2.0-2'}}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

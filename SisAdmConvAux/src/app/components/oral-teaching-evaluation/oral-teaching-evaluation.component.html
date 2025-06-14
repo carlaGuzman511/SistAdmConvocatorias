@@ -1,0 +1,54 @@
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+     initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+</head>
+  
+<div class="table-container">
+    <div class="greeting-title">Evaluacion Oral</div>
+    <label class="academic-unit"><strong>Unidad Academica: </strong>{{user.announcements[0].academicUnit.name}}</label>
+    <label class="area"><strong>Area: </strong>{{user.announcements[0].area.name}}</label>
+    <label class="management"><strong>Gestion: </strong>{{user.announcements[0].management.period}}</label>
+    <label class="aux"><strong>Auxiliatura: </strong>{{user.auxiliarys[0].name}}</label>
+    <label class="percentage"><strong>Porcentaje: </strong>{{knowledgeEvaluation.percentage}}%</label>
+    <label class="nro">#</label>
+    <label class="name">Nombre Completo</label>
+    <label class="ci">Carnet de Identidad</label>
+    <label class="calificacion">Calificacion</label>
+
+    <form class="form" [formGroup]="evaluationForm">
+        <div class="form-group">
+            <div formArrayName="evaluations">
+                <div *ngFor="let item of getEvaluations.controls; let i=index" [formGroupName]="i">
+                    <ng-container *ngIf="logBooks[i].label.auxiliary.code == auxiliary.code">
+                        <div class="form-group row">
+                            <div class="col-md-1">
+                                <label class="field-name" [attr.for]="'score' + i">{{(i+1)}}</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="field-name" [attr.for]="'score' + i">{{getFullNamePostulant(i)}}</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="field-ci" [attr.for]="'score' + i">{{getIdentityCardPostulant(i)}}</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" [attr.id]="'score' + i" class="form-control" formControlName="score" [ngClass]="{'form-control': true,
+                                'is-invalid': item.controls.score.invalid && item.controls.score.touched,
+                                'is-valid': item.controls.score.valid}" id="score">
+                                <small *ngIf="item.controls.score.errors?.required && item.controls.score.touched" class="form-text custom-invalid-feedback">Ingresa la calificacion del examen oral</small>
+                                <small *ngIf="item.controls.score.errors?.pattern && item.controls.score.touched" class="form-text custom-invalid-feedback">Ingresa numeros positivos con una precision de dos decimales</small>                   
+                                <label class="base" [attr.for]="'score' + i">/100</label>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <button class="btn-cancel"(click)="cancel()">Cancelar</button>
+        </div>
+        <div class="form-group col-md-6">
+            <button class="btn-save" (click)="save()">Guardar</button>
+        </div>
+    </form>
+</div>
+  

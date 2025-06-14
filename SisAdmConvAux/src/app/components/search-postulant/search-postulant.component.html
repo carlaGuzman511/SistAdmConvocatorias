@@ -1,0 +1,50 @@
+<div class="centerCard">
+  <div class="postulant-table-container">
+      <div class="greeting-title">Lista de aspirantes a postulantes</div>
+  </div>
+
+  <form id="form" [formGroup]="form" (ngSubmit)="searchFuntion()">
+    <div class="filter-form">
+      <div class="search-hero">
+        <label class="col-form-label">Convocatorias</label>
+        <select formControlName="announcement" id="announcement" name="announcement" style="width: 80%;" class="form-control" rquired (ngModelChange)="saveDataAU($event)">
+          <option *ngFor="let announcement of announcementList" [value]="announcement.idannouncement">
+          {{announcement.title}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-inline">
+      <div class="search-hero" style="width: 100%;">
+        <input class="form-control" style="width: 60%;" type="text" name="text" formControlName="searchbox"
+          autocomplete="off" placeholder="Búsqueda por Nombre">
+        <div class="text-danger" *ngIf="form.controls.searchbox.touched && form.controls.searchbox.invalid">
+          <div *ngIf="form.controls.searchbox.errors.required">El campo requerido</div>
+        </div>
+        <button type="submit" (onClick)="searchFuntion()" class="btn btn-primary" style="width: 20%;"
+          [disabled]="!form.valid">Buscar
+        </button>
+      </div>
+    </div>
+
+  </form>
+  <table class="table table-bordered">
+    <thead class="thead">
+      <tr>
+        <th scope="col">Nombres y Apellidos</th>
+        <th scope="col">Auxiliatura</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of finalList; let i = index ">
+        <td>{{person.person.name}} {{person.person.lastName}}</td>
+        <td>{{auxialiaries[i]}}</td>
+        <td><button [routerLink]="['/secretario/registerPostulantOnLogbook',  person.person.id]" class="reg-logbook">
+              Registrar
+            </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

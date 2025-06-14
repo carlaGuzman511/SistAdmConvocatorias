@@ -1,0 +1,71 @@
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+     initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+  </head>
+
+  <div class="container">
+    <div class="greeting-title">Convocatorias</div>
+  <div class="form-container" >
+    <form  class="filter-form" [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+        <div class="form-row" >
+          <div class="form-group col-md-2">
+            <label class="col-form-label">Gestion</label>
+            <select formControlName="year" id="year" name="year" class="form-control" >
+              <option *ngFor="let management of managementList" [value]="management.idmanagement">{{management.period}}</option>
+            </select>
+         </div>
+          <div class="form-group col-md-5">
+            <label class="col-form-label">Facultad</label>
+            <select formControlName="faculty" id="faculty" class="form-control" >
+                <option *ngFor="let fac of facultyList" [value]="fac.idfaculty">{{fac.name}}</option>
+            </select>
+            <div *ngIf="filterForm.controls.faculty.touched && filterForm.controls['faculty'].errors?.required" class="alert">Facultad necesaria</div>
+          </div>
+          <div class="form-group col-md-3">
+            <label class="col-form-label">Area</label>
+            <select name="area" class="form-control" formControlName="area" (ngModelChange)="saveDataAU($event)">
+              <option *ngFor="let area of areaList" [value]="area.idarea">
+              {{area.name}}  </option>
+            </select>
+            <div *ngIf="filterForm.controls.area.touched && filterForm.controls['area'].errors?.required" class="text-danger">Area necesaria</div>
+          </div>
+         </div>
+         <div class="form-row">
+          <div class="form-group col-md-5">
+            <label class="col-form-label">Unidad Academica</label>
+            <select name="unit" class="form-control"  formControlName="academicUnit"  >
+              <option *ngFor="let unit of academicUnitList" [value]="unit.idacademicunit" >{{unit.name}}</option>
+            </select>
+            <div *ngIf="filterForm.controls.academicUnit.touched && filterForm.controls['academicUnit'].errors?.required" class="text-danger">Unidad Academica necesaria</div>
+          </div>
+            <div class="form-group col-md-5">
+              <br>
+              <br>
+              <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (onClick)="onSubmit()">Listar</button>
+            </div>
+          </div>
+    </form>
+  </div>
+      <table class="table table-hover" id="basic-table" *ngIf="show">
+      <thead class="thead">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Titulo</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container  *ngFor="let announcement of announcementList ; let indice=index">
+          <tr >
+            <td>{{indice+1}}</td>
+            <td>{{announcement.title}}</td>
+            <td>
+             <button type="button" class="btn btn-primary" (click)="viewAnnouncement(announcement)">Ver </button>
+            </td>
+         </tr>
+          </ng-container>
+      </tbody>
+    </table>
+
+  </div>
+

@@ -1,0 +1,58 @@
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+   initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<form class="label-form" style="width:100%;" [formGroup]="form">
+<br>
+<h3 class="container text-center">AUTORIDADES QUE FIRMAN LA CONVOCATORIA</h3>
+<hr>
+<!-- X -->
+<div formArrayName="authorities">
+  <div *ngFor="let Q of form['controls'].authorities['controls']; let iq=index">
+    <div formGroupName="{{iq}}" class="Xs">
+        <b>Autoridad {{iq+1}}</b>
+      <div class="form-group row">
+        <div class="col-md-4">
+          <label for="name">Nombre completo</label>
+          <input type="text" class="form-control" formControlName="name"  [ngClass]="{'form-control': true,
+          'is-invalid': Q.controls.name.invalid && Q.controls.name.touched,
+          'is-valid': Q.controls.name.valid}">
+          <small *ngIf="Q.controls.name.errors?.required && Q.controls.name.touched" class="form-text custom-invalid-feedback">Ingrese un nombre o elimine el campo</small>
+          <small *ngIf="Q.controls.name.errors?.maxlength && Q.controls.name.touched" class="form-text custom-invalid-feedback">Ingrese 50 caracteres como máximo</small>
+          <small *ngIf="Q.controls.name.errors?.minlength && Q.controls.name.touched" class="form-text custom-invalid-feedback">Ingrese 3 caracteres como mínimo</small>
+        </div>
+        <div class="col-md-7">
+          <label for="position">Cargo</label>
+          <input type="text" class="form-control" formControlName="position"  [ngClass]="{'form-control': true,
+            'is-invalid': Q.controls.position.invalid && Q.controls.position.touched,
+            'is-valid': Q.controls.position.valid}">
+          <small *ngIf="Q.controls.position.errors?.required && Q.controls.position.touched" class="form-text custom-invalid-feedback">Ingrese un cargo o elimine el campo</small>
+          <small *ngIf="Q.controls.position.errors?.maxlength && Q.controls.position.touched" class="form-text custom-invalid-feedback">Ingrese 150 caracteres como máximo</small>
+          <small *ngIf="Q.controls.position.errors?.minlength && Q.controls.position.touched" class="form-text custom-invalid-feedback">Ingrese 3 caracteres como mínimo</small>
+        </div>
+        <div class="col-md-1">
+          <br>
+          <button class="btn btn-danger" (click)="removeX(iq)"><i class="fa fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-sm btn-primary" (click)="addX()">Añadir</button>
+  <br>
+</div>
+    <!-- X End -->
+    <br>
+<div class="form-row">
+  <div class="col-md-4">
+    <!--<button class="btn btn-sm btn-danger btn-lg btn-block ">Cancelar</button>-->
+  </div>
+  <div class="col-md-4">
+    <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (click)="save()" [disabled]="!form.valid">Guardar</button>
+  </div>
+  <div class="col-md-4">
+    <!--<button class="btn btn-sm btn-danger btn-lg btn-block ">Cancelar</button>-->
+  </div>
+</div>
+</form>
+

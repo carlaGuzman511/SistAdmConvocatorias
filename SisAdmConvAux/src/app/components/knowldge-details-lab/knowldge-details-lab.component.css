@@ -1,0 +1,100 @@
+.btn-list {
+  border: #003770;
+  background-color: #003770;
+  color: aliceblue;
+}
+.col-form-label {
+  margin-top: 10px;
+}
+
+.field {
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+}
+
+.btnsPrint > .btn-print {
+  float: right;
+  border: #003770;
+  background-color: aliceblue;
+  color: #003770;
+  border-radius: 3px;
+  width: 200px;
+  margin: 5px;
+}
+
+.thead {
+  background-color: #003770;
+  color: aliceblue;
+  font-size: 20px;
+}
+
+td {
+  font-size: 18px;
+}
+.greeting-title {
+  color: #003770;
+  font-size: 50px;
+  text-align: center;
+  grid-column-start: 2;
+  grid-column-end: -1;
+  grid-row-start: 4;
+  grid-row-end: 4;
+}
+.table {
+  font-size: 20px;
+  grid-column-start: 2;
+  grid-column-end: 6;
+  grid-row-start: 5;
+  grid-row-end: 5;
+  width: 100%;
+}
+
+.view,
+.review {
+  border: #003770;
+  border-radius: 3px;
+  background-color: #003770;
+  color: aliceblue;
+  font-size: 20px;
+  margin: 5px;
+}
+.view {
+  width: 70px;
+}
+.btn-print {
+  margin-bottom: 10px;
+}
+
+.btn-primary {
+  margin-right: 15px;
+}
+
+.content-evaluation {
+  background-color: #d1dae3;
+}
+.btn-primary,
+.btn-primary:visited,
+.btn-primary:active {
+  background-color: #003770 !important;
+  border-color: #003770 !important;
+  font-size: large;
+}
+
+.btn-primary:hover {
+  background-color: #003670d5 !important;
+  border-color: #003670d5 !important;
+}
+
+.btn-print {
+  margin-bottom: 20px;
+}
+.postulant {
+  float: left;
+  text-align: left;
+}
+.btn {
+  float: left;
+  background-color: #003770;
+  color: aliceblue;
+  width: 80px;
+}

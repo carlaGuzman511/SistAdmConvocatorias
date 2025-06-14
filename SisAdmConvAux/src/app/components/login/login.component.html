@@ -1,0 +1,35 @@
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+     initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+</head>
+
+<div class="login-container">
+    <div class="greeting greeting-title">Bienvenido</div>
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login()" style="background-color: whitesmoke">
+        <div class="form-group">
+            <label class="labels">Carnet de Identidad:</label>
+
+            <input type="text" class="form-control" formControlName="ci" placeholder="Ingresa tu carnet de identidad" required [ngClass]="{'form-control': true,
+            'is-invalid': loginForm.controls.ci.invalid && loginForm.controls.ci.touched,
+            'is-valid': loginForm.controls.ci.valid}" id="ci"/>
+            <small *ngIf="loginForm.controls.ci.errors?.minlength && loginForm.controls.ci.touched" class="form-text custom-invalid-feedback">Cantidad de caracteres minima: 6</small>
+            <small *ngIf="loginForm.controls.ci.errors?.required && loginForm.controls.ci.touched" class="form-text custom-invalid-feedback">Ingresa tu numero de carnet de identidad</small>
+            <small *ngIf="loginForm.controls.ci.errors?.maxlength && loginForm.controls.ci.touched" class="form-text custom-invalid-feedback">Cantidad de caracteres maxima: 10</small>
+            <small *ngIf="loginForm.controls.ci.errors?.pattern && loginForm.controls.ci.touched" class="form-text custom-invalid-feedback">Ingresa numeros enteros positivos</small>
+        </div>        
+        <div class="form-group">    
+            <label class="labels">Contraseña:</label>
+            <input type="password" class="form-control" formControlName="password" placeholder="Ingresa tu contraseña" required [ngClass]="{'form-control': true,
+            'is-invalid': loginForm.controls.password.invalid && loginForm.controls.password.touched,
+            'is-valid': loginForm.controls.password.valid}" id="password"/>
+            <small *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched" class="form-text custom-invalid-feedback">Ingresa tu contraseña</small>
+            <small *ngIf="loginForm.controls.password.errors?.minlength && loginForm.controls.password.touched" class="form-text custom-invalid-feedback">Cantidad de caracteres minima: 5</small>
+        </div>
+        <div class="form-group">
+            <button type="button" type="submit" [disabled]="!loginForm.valid" class="btn-signin">Iniciar Sesion</button>
+        </div>
+        <div id="alert" class="{{ showMessage.message.type }}" *ngIf="showMessage.message.message != ''" role="alert">
+            {{ showMessage.message.message }}
+        </div>
+    </form>
+</div>

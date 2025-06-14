@@ -1,0 +1,55 @@
+.centerCard {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  right: 10%;
+  width: 80%;
+  border: 0px;
+}
+
+.search-hero {
+  position: relative;
+  padding-bottom: 50px;
+  margin: auto;
+  right: 10%;
+  left: 10%;
+}
+
+.postulant-table-container .greeting-title {
+  color: #003770;
+  font-size: 50px;
+  text-align: center;
+  grid-column-start: 1;
+  grid-column-end: -1;
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+
+.postulant-table-container .table {
+  font-size: 20px;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}
+
+.thead {
+  background-color: #003770;
+  color: aliceblue;
+}
+
+.postulant-table-container {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 10% 80% 10%;
+  grid-template-rows: 10% 90%;
+  grid-gap: 25px;
+}
+
+.reg-logbook {
+  border: #003770;
+  border-radius: 3px;
+  background-color: #003770;
+  color: aliceblue;
+}

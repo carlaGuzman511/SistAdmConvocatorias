@@ -1,0 +1,65 @@
+.form-container {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: 100%;
+  grid-template-areas: ". form .";
+}
+
+.field {
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+}
+
+.label-form {
+  border: 1px solid #E1E1E1;
+  border-radius: 5px;
+  padding: 15px;
+  width: 900px;
+}
+
+.Xs{
+  border: #e9e8e8 1px;
+  background-color: #f3f3f3;
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+.btn-primary, .btn-primary:visited, .btn-primary:active {
+  background-color: #003770 !important;
+  border-color: #003770 !important;
+}
+
+.btn-primary:hover {
+  background-color: #003670d5 !important;
+  border-color: #003670d5 !important;
+}
+
+.btn-green, .btn-green:visited, .btn-green:active {
+  background-color: #04F270 !important;
+  border-color: #04F270 !important;
+}
+
+.btn-green:hover {
+  background-color: #76E8A9 !important;
+  border-color: #76E8A9 !important;
+}
+.btn-secondary, .btn-secondary:visited, .btn-secondary:active {
+  background-color: #FF0000 !important;
+  border-color: #FF0000 !important;
+}
+
+.btn-secondary:hover {
+  background-color: #ef1c27d8 !important;
+  border-color: #ef1c27d8 !important;
+}
+.greeting-title {
+  color: #003770;
+  font-size: 50px;
+  text-align:center;
+  grid-column-start: 1;
+  grid-column-end: -1;
+  grid-row-start: 2;
+  grid-row-end: 2;
+}

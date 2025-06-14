@@ -1,0 +1,125 @@
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+   initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+</head>
+
+<div class="table-container">
+  <div class="greeting-title">Calificación de Conocimientos</div>
+
+  <form class="form" [formGroup]="evaluationForm">
+      <div class="form-group">
+          <input id="textarea" class="form-control" formControlName="description" placeholder="Añadir Descripcion"
+              [ngClass]="{'form-control': true,
+          'is-invalid': evaluationForm.controls.description.invalid && evaluationForm.controls.description.touched,
+          'is-valid': evaluationForm.controls.description.valid}" id="description">
+          <small
+              *ngIf="evaluationForm.controls.description.errors?.required && evaluationForm.controls.description.touched"
+              class="form-text custom-invalid-feedback">Ingresa la descripcion de la evaluacion</small>
+          <small
+              *ngIf="evaluationForm.controls.description.errors?.maxLength && evaluationForm.controls.description.touched"
+              class="form-text custom-invalid-feedback">Cantidad de caracteres minima: 5</small>
+          <small
+              *ngIf="evaluationForm.controls.description.errors?.maxlength && evaluationForm.controls.description.touched"
+              class="form-text custom-invalid-feedback">Cantidad de caracteres maxima: 2500</small>
+      </div>
+      <div class="row">
+          <div class="form-group col-md-6 row">
+              <label class="col-md-6">Puntaje Base</label>
+              <input id="baseScore" type="text" class="form-control col-md-4" formControlName="baseScore" [ngClass]="{'form-control': true,
+          'is-invalid': evaluationForm.controls.baseScore.invalid && evaluationForm.controls.baseScore.touched,
+          'is-valid': evaluationForm.controls.baseScore.valid}">
+              <small
+                  *ngIf="evaluationForm.controls.baseScore.errors?.required && evaluationForm.controls.baseScore.touched"
+                  class="form-text custom-invalid-feedback">Ingresa el puntaje base de la evaluacion</small>
+              <small
+                  *ngIf="evaluationForm.controls.baseScore.errors?.pattern && evaluationForm.controls.baseScore.touched"
+                  class="form-text custom-invalid-feedback">Ingresa numeros positivos con una precision de dos decimales</small>
+          </div>
+
+          <div class="form-group col-md-6 row">
+              <label class="percentage col-md-6">Porcentaje sobre puntaje final</label>
+              <input id="percentageFinal" type="text" class="form-control col-md-4" formControlName="percentageFinal"
+                  [ngClass]="{'form-control': true,
+          'is-invalid': evaluationForm.controls.percentageFinal.invalid && evaluationForm.controls.percentageFinal.touched,
+          'is-valid': evaluationForm.controls.percentageFinal.valid}">
+              <small
+                  *ngIf="evaluationForm.controls.percentageFinal.errors?.required && evaluationForm.controls.percentageFinal.touched"
+                  class="form-text custom-invalid-feedback">Ingresa el porcentaje sobre puntaje final de la
+                  evaluacion</small>
+              <small
+                  *ngIf="evaluationForm.controls.percentageFinal.errors?.pattern && evaluationForm.controls.percentageFinal.touched"
+                  class="form-text custom-invalid-feedback">Ingresa numeros positivos con una precision de dos decimales </small>
+          </div>
+      </div>
+      <div class="form-group">
+          <div formArrayName="evaluations">
+              <table class="table table-bordered">
+                  <thead class="thead">
+                      <tr>
+                          <th scope="col">Auxiliatura</th>
+                          <th scope="col">Tematica</th>
+                          <th scope="col">Porcentaje</th>
+                          <th scope="col">Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let aspirante of aspirantes">
+                          <td></td>
+                      </tr>
+                  </tbody>
+              </table>
+              <div *ngFor="let item of getEvaluations.controls; let i=index" [formGroupName]="i">
+                  <div class="form-group row">
+                      <div class="col-md-3">
+                          <label class="field" [attr.for]="'auxiliary' + i" style="display: none;">Codigo de Auxiliatura</label>
+                          <select formControlName="auxiliary" [attr.id]="'auxiliary' + i" class="form-control"
+                            rquired (ngModelChange)="searchThematics(i)">
+                              <option *ngFor="let requirement of requirement$ | async" [value]="requirement.auxiliary.idauxiliary">
+                                  {{ requirement.auxiliary.name }}
+                              </option>
+                          </select>
+                      </div>
+                      <div class="col-md-3">
+                          <label class="field" [attr.for]="'thematic' + i" style="display: none;">Tematica</label>
+                          <select formControlName="thematic" [attr.id]="'thematic' + i" class="form-control">
+                              <option *ngFor="let thematic of thematic$ | async" [value]="thematic.idthematic">
+                                  {{ thematic.name }}
+                              </option>
+                          </select>
+                      </div>
+                      <div class="col-md-3">
+                          <label class="field" [attr.for]="'percentage' + i" style="display: none;">Porcentaje</label>
+                          <input type="text" [attr.id]="'percentage' + i" class="form-control"
+                              formControlName="percentage" [ngClass]="{'form-control': true,
+                          'is-invalid': item.controls.percentage.invalid && item.controls.percentage.touched,
+                          'is-valid': item.controls.percentage.valid}" id="percentage">
+                          <small *ngIf="item.controls.percentage.errors?.required && item.controls.percentage.touched"
+                              class="form-text custom-invalid-feedback">Ingresa el porcentaje de la evaluacion</small>
+                          <small
+                              *ngIf="item.controls.percentage.errors?.maxLength && item.controls.percentage.touched"
+                              class="form-text custom-invalid-feedback">Cantidad de caracteres minima: 1</small>
+                          <small
+                              *ngIf="item.controls.percentage.errors?.maxlength && item.controls.percentage.touched"
+                              class="form-text custom-invalid-feedback">Cantidad de caracteres maxima: 3</small>
+                          <small *ngIf="item.controls.percentage.errors?.pattern && item.controls.percentage.touched"
+                              class="form-text custom-invalid-feedback">Ingresa numeros enteros positivos</small>
+                      </div>
+                      <div class="col-md-3">
+                          <button class="btn-delete" (click)="removeEvaluation(i)">Eliminar Evaluacion</button>
+                      </div>
+                  </div>
+              </div>
+              <button class="btn-add" (click)="addEvaluation()"
+                  [disabled]="!evaluationForm.get('evaluations').valid">Añadir Evaluacion</button>
+          </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-6">
+            <button class="btn btn-sm btn-danger btn-lg btn-block " type="submit" (click)="cancel()">Cancelar</button>
+        </div>
+        <div class="form-group col-md-6">
+            <button class="btn btn-sm btn-primary btn-lg btn-block" (click)="save()" [disabled]="!evaluationForm.valid">Guardar</button>
+        </div>
+      </div>
+  </form>
+</div>

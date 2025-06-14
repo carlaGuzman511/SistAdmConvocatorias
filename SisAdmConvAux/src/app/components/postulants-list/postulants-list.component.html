@@ -1,0 +1,72 @@
+<head>
+  <script src="tableToExcel.js"></script>
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+    initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="content-type" content="text/plain; charset=UTF-8" />
+</head>
+
+<div class="select-container">
+  <form class="searchAnnouncement" [formGroup]="searchAnnouncementForm">
+    <div id="select" class="form-group col-md-8">
+      <label>Convocatorias: </label>
+      <select formControlName="announcement" class="form-control" (change)="searchFuntion(searchAnnouncementForm.controls.announcement.value)" required>
+        <option *ngFor="let announcement of announcements; let indice=index" [value]="indice">
+          {{ announcement.title }}
+        </option>
+      </select>
+    </div>
+  </form>
+</div>
+
+<div class="postulant-table-container">
+  <div class="greeting-title">Lista de Postulantes</div>
+
+  
+  <div class="title">{{titleAnnouncement()}}</div>
+
+  <button (click)="printTable()" class="download">Generar PDF</button>
+  <button (click)="tableToExcel('basic-table', 'postulantes')" class="downloadExcel">Generar Excel</button>
+
+  <label class='academic-unit'><strong>Unidad Academica: </strong>{{academicUnitAnnouncement()}}</label>
+  <label class='area'><strong>Area: </strong>{{areaAnnouncement()}}</label>
+  <label class='management'><strong>Gestion: </strong>{{managementAnnouncement()}}</label>
+  
+
+  <form class="searchbox" id="SearchForm" [formGroup]="searchForm" (ngSubmit)="searchFuntion(searchAnnouncementForm.controls.announcement.value)">
+    <div class="search-hero" style="width: 100%;">
+      <input type="text" name="text" formControlName="searchtext" autocomplete="off"
+        placeholder="Búsqueda por Nombre" style="width: 60%;">
+      <button type="submit" (onClick)="searchFuntion(searchAnnouncementForm.controls.announcement.value)" class="btn btn-primary" style="width: 20%;">
+        Buscar
+      </button>
+    </div>
+  </form>
+
+  <table id="basic-table" class="table table-bordered">
+    <thead class="thead">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Auxiliatura</th>
+        <th scope="col">Nombres</th>
+        <th scope="col">Apellidos</th>
+        <th scope="col">Carnet de Identidad</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let logBook of logBook$; let indice=index">
+        <tr>
+          <td>{{indice+1}}</td>
+          <td>{{logBook.label.auxiliary.name}}</td>
+          <td>{{logBook.label.postulantes.person.name}}</td>
+          <td>{{logBook.label.postulantes.person.lastName}}</td>
+          <td>{{logBook.label.postulantes.person.ci}}</td>
+          <td>
+            <button (click)="reviewRequirements(logBook.label.idlabel)" class="review-requirements">
+              revisar
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>

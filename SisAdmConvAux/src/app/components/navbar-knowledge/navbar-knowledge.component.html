@@ -1,0 +1,47 @@
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+     initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  </head>
+   <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand">
+      <img src="assets/images/logo_umss.png" width="70" height="85" alt="">
+    </a>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      ADMINISTRACION DE CONVOCATORIAS DE AUXILIATURAS
+    </div>
+    <ul class="navbar-nav  ">
+        <li class="nav-item" *ngIf="typeKnowL">
+            <div class="btn-group itemNav" dropdown >
+              <a id="button-basic" dropdownToggle type="button" class="dropdown-toggle nav-link "
+                      aria-labelledby="button-animated"> Registrar Notas Laboratorio <span class="caret"></span>
+              </a>
+              <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                <li role="menuitem"><a class="dropdown-item" routerLink='/conocimiento/laboratorio-escrito'>Evaluacion Escrita </a></li>
+              </ul>
+            </div>
+        </li>
+      <li class="nav-item" *ngIf="typeKnowD">
+        <div class="btn-group itemNav" dropdown>
+          <a id="button-basic" dropdownToggle type="button" class="dropdown-toggle nav-link "
+                  aria-labelledby="button-animated"> Registrar Notas Docencia <span class="caret"></span>
+          </a>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem"><a class="dropdown-item" routerLink='/conocimiento/docencia-escrito'>Evaluacion Escrita </a></li>
+            <li role="menuitem"><a class="dropdown-item" routerLink='/conocimiento/docencia-oral'>Evaluacion Oral</a></li>
+          </ul>
+        </div>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link logout" routerLink="/conocimiento/resultadosDeConocimientos"> Lista resultados de conocimientos</a>
+        </li>
+          <li class="nav-item ">
+            <a class="nav-link logout" (click)="logOut()">Salir</a>
+          </li> 
+        <div class="infoUser">
+          <li class="nav-item ">
+            <a> <img src="assets/images/user.png" alt="" width="20px">Comision Conocimientos: <br> &nbsp; {{userName}}</a>
+          </li>
+        </div>
+    </ul>
+  </nav>

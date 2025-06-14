@@ -1,0 +1,100 @@
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <table class="table">
+                <thead class="thead">
+                    <tr>
+                        <th scope="col"><img src="../../../assets/images/logo_umss.png" height="75px" /></th>
+                        <th scope="col">
+                            <h6 class="text-light">Universidad Mayor de San Simón</h6>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            <p><strong>Sistema de Administración de Convocatorias de Auxiliares</strong></p>
+        </div>
+
+        <div id="accordion">
+            <div>
+                <h6 class="mb-0">
+                    <strong>Convocatorias</strong>
+                </h6>
+            </div>
+            <div>
+                <div>
+                    <h5 class="mb-0">
+                        <button class="btn text-light collapsed" routerLink="/admin/generarConvocatoria">
+                            Nueva Convocatoria
+                        </button>
+                    </h5>
+                </div>
+                <div>
+                    <h5 class="mb-0">
+                        <button class="btn text-light collapsed" routerLink="/admin/listarConvocatoriasAdmin">
+                           Buscar Convocatoria
+                        </button>
+                    </h5>
+                </div>
+            </div>
+            <div>
+                <h6 class="mb-0">
+                    <strong>Postulantes</strong>
+                </h6>
+            </div>
+            <div>
+                <h5 class="mb-0">
+                    <button class="btn text-light collapsed" routerLink="/admin/adm-habilitados-no-habilitados">
+                        Lista habilitados / Inhabilitados
+                    </button>
+                </h5>
+            </div>
+            <div>
+                <h5 class="mb-0">
+                    <button class="btn text-light collapsed" routerLink="/admin/admin-no-habilitados">
+                        Lista Inhabilitados
+                    </button>
+                </h5>
+            </div>
+            <div>
+                <h5 class="mb-0">
+                    <button class="btn text-light collapsed" routerLink="/admin/resultadosDeConocimientos">
+                        Resultados de conocimientos
+                    </button>
+                </h5>
+            </div>
+            <div>
+                <h5 class="mb-0">
+                    <button class="btn text-light collapsed" routerLink="/admin/resultadosFinales">
+                        Resultados Finales/Asignacion de items
+                    </button>
+                </h5>
+            </div>
+            <div>
+                <h5 class="mb-0">
+                    <button class="btn text-light collapsed" routerLink="/admin/reporteFinal">
+                        Reporte final de Items Asignados
+                    </button>
+                </h5>
+            </div>
+            <div routerLink="/admin/registrar-comision" style="cursor: pointer;">
+                <h6 class="mb-0">
+                    <button routerLink="/admin/registrar-comision" class="btn text-light collapsed">
+                        Registrar Miembro de la Comision
+                    </button>
+                </h6>
+            </div>
+        </div>
+
+        <ul class="list-unstyled CTAs">
+            <li>
+                <a (click)="logOut()" class="btn-secondary">Salir</a>
+            </li>
+        </ul>
+    </nav>
+    <div id="content">
+        <router-outlet class="bodyContainer"></router-outlet>
+    </div>
+
+</div>
+<!-- <router-outlet class="bodyContainer"></router-outlet> -->

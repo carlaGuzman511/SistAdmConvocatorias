@@ -1,0 +1,97 @@
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no,
+     initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  </head>
+  <div class="container">
+    <div class="greeting-title">Reporte Final de Items Asignados</div>
+    <div class="btnsPrint" *ngIf="viewResults">
+      <button type="button" class="btn btn-print " (click)="pdfTable()">Generar PDF</button>
+      <button (click)="tableToExcel('basic-table', 'reportesFinales')"class="btn btn-print">Generar Excel</button>      
+    </div><br><br>
+    <div clas="form-container">
+     <form  class="filter-form" [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+      <div class="form-row" [ngClass]="{'invalid-feedback': !filterForm.get('year').valid}" >
+        <div class="form-group col-md-2">
+          <label class="col-form-label">Gestion</label>
+          <select name="year" class="form-control" formControlName="year"  (ngModelChange)="saveDataAuxiliary($event)">
+            <option *ngFor="let management of managementList" [value]="management.idmanagement">{{management.period}}</option>
+          </select>
+          <div *ngIf="filterForm.controls.year.touched && filterForm.controls['year'].errors?.required" class="text-danger">Gestion necesaria</div>
+        </div>
+  
+        <div class="form-group col-md-8">
+          <label class="col-form-label">Unidad Academica</label>
+          <select  class="form-control"  formControlName="academicUnit" required  (ngModelChange)="saveDataAuxiliary($event)">
+            <option *ngFor="let unit of academicUnitList" [value]="unit.idacademicunit" >{{unit.name}}</option>
+          </select>
+          <div *ngIf="filterForm.controls.academicUnit.touched && filterForm.controls['academicUnit'].errors?.required" class="text-danger">Unidad Academica necesaria</div>
+        </div>
+        <div class="form-group col-md-2">
+          <label class="col-form-label">Area</label>
+          <select name="area" class="form-control" formControlName="area" required (ngModelChange)="saveDataAuxiliary($event)">
+            <option *ngFor="let area of areaList" [value]="area.idarea">
+            {{area.name}}  </option>
+          </select>
+          <div *ngIf="filterForm.controls.area.touched && filterForm.controls['area'].errors?.required" class="text-danger">Area necesaria</div>
+        </div>
+      </div> 
+  
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label class="col-form-label">Auxiliatura</label>
+          <select formControlName="auxiliary" id="auxiliary" class="form-control" >
+            <option value="Todos">Todos</option>
+              <option *ngFor="let aux of auxiliaryList" value={{aux.idauxiliary}}>{{aux.name}}</option>
+          </select>
+          <div *ngIf="filterForm.controls.auxiliary.touched && filterForm.controls['auxiliary'].errors?.required" class="alert">Auxiliatura necesaria</div>
+        </div>
+        <div class="form-group col-md-3">
+          <label class="col-form-label">Estado</label>
+          <select formControlName="statusAssigned" id="statusAssigned" class="form-control">
+            <option value="Todos">Todos</option>
+            <option value="true">Asignado</option>
+            <option value="false">No asignado</option>
+          </select>
+          <div *ngIf="filterForm.controls.auxiliary.touched && filterForm.controls['auxiliary'].errors?.required" class="alert">Auxiliatura necesaria</div>
+        </div>
+        <div class="form-group col-md-3">
+          <br>
+          <br>
+          <button class="btn btn-sm btn-primary btn-lg btn-block" type="submit" (onClick)="onSubmit()">Listar</button>
+        </div>
+      </div>
+  </form>
+  </div>
+    <div class="containerFinalResults" *ngIf="viewResults">
+     <table class="table table-hover" id="basic-table">
+        <thead class="thead">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Auxiliatura</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Puntaje Total</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let result of results ; let indice=index">
+            <tr>
+              <td>{{indice+1}}</td>
+              <td>{{result.postulantes.person.name}}</td>
+              <td>{{result.postulantes.person.lastName}}</td>
+              <td>{{result.auxiliary.name}}</td>
+              <td *ngIf="!result.status" [style.color]="'#ef1c27d8'"> No asignado</td>
+              <td *ngIf="result.status" [style.color]="'#0ca93e'"> Item asignado</td>
+              <td>{{result.scoreTotal | number:'2.0-2'}}</td>
+              <td>
+                <button class="btn-primary" (click)="seeDetails(result.postulantes.idpostulant)">Ver</button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

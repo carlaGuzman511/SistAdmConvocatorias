@@ -1,0 +1,162 @@
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+   initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+</head>
+
+<div class="register-container">
+  <div class="greeting-title">Registrar Miembro de la Comision</div>
+  <br>
+  
+  <form class="user-form" [formGroup]="userForm" (ngSubmit)="saveUser()" style="background-color: whitesmoke"> 
+
+    <div class="form-row">
+
+      <div class="form-group col-md-6">
+        <label class="labels">Rol</label>
+        <select formControlName="role" class="form-control" (change)="searchThematics()">
+          <option *ngFor="let role of roles; let i=index" [value]="role.idrole">
+            {{ role.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-6">
+        
+        <div *ngIf="userForm.controls.role.value==3 || userForm.controls.role.value==5">
+          <label class="labels">Tematica</label>
+          <ng-container *ngIf="userForm.controls.area.value==1">
+            <select formControlName="thematic" class="form-control">
+              <option *ngFor="let thematic of thematic$ | async; let q=index" [value]="thematic.idthematic">
+                {{ thematic.name }}
+              </option>
+            </select>
+          </ng-container>
+
+          <ng-container *ngIf="userForm.controls.area.value!=1">
+            <select formControlName="auxiliary" class="form-control">
+              <option *ngFor="let auxiliary of auxiliarie$ | async; let p=index" [value]="auxiliary.idauxiliary">
+                {{ auxiliary.name }}
+              </option>
+            </select>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label class="labels">Nombres</label>
+        <input type="text" formControlName="names" class="form-control">
+        <div class="alert alert-danger" *ngIf="userForm.controls.names.touched && userForm.controls.names.invalid">
+          <div *ngIf="userForm.controls.names.errors.required">
+            Ingresa un nombre
+          </div>
+          <div *ngIf="userForm.controls.names.errors.minlength">
+            Cantidad minima de caracteres: 3
+          </div>
+          <div *ngIf="userForm.controls.names.errors.maxlength">
+            Cantidad maxima de caracteres: 50
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label class="labels">Apellidos</label>
+        <input type="text" formControlName="lastNames" class="form-control">
+        <div class="alert alert-danger" *ngIf="userForm.controls.lastNames.touched && userForm.controls.lastNames.invalid">
+          <div *ngIf="userForm.controls.lastNames.errors.required">
+            Ingresa un apellido
+          </div>
+          <div *ngIf="userForm.controls.lastNames.errors.minlength">
+            Cantidad minima de caracteres: 3
+          </div>
+          <div *ngIf="userForm.controls.lastNames.errors.maxlength">
+            Cantidad maxima de caracteres: 50
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label class="labels">Cedula de Identidad</label>
+        <input type="text" formControlName="identityCard" class="form-control">
+        <div class="alert alert-danger" *ngIf="userForm.controls.identityCard.touched && userForm.controls.identityCard.invalid">
+          <div *ngIf="userForm.controls.identityCard.errors.required">
+            Ingresa un numero de telefono
+          </div>
+          <div *ngIf="userForm.controls.identityCard.errors.pattern">
+            Ingresa solo numeros
+          </div>
+          <div *ngIf="userForm.controls.identityCard.errors.minlength">
+            Cantidad minima de caracteres: 6
+          </div>
+          <div *ngIf="userForm.controls.identityCard.errors.maxlength">
+            Cantidad maxima de caracteres: 10
+          </div>
+        </div>
+      </div>    
+      <div class="form-group col-md-6">  
+        <label class="labels" for="inputEmail4">Correo Electronico</label>
+        <input type="email" formControlName="email" class="form-control">
+        <div class="alert alert-danger" *ngIf="userForm.controls.email.touched && userForm.controls.email.invalid">
+          <div *ngIf="userForm.controls.email.errors.required">
+            Ingresa un correo electronico
+          </div>
+          <div *ngIf="userForm.controls.email.errors.email">
+            Ingresa una direccion de correo electronico valido
+          </div>
+          <div *ngIf="userForm.controls.email.errors.maxlength">
+            Cantidad maxima de caracteres: 50
+          </div>
+          <div *ngIf="userForm.controls.email.errors.minlength">
+            Cantidad minima de caracteres: 10
+          </div>
+        </div>
+      </div>   
+    </div>
+    <div class="form-row">    
+      <div class="form-group col-md-6">
+        <label class="labels">Telefono</label>
+        <input type="text" formControlName="phoneNumber" class="form-control">
+        <div class="alert alert-danger" *ngIf="userForm.controls.phoneNumber.touched && userForm.controls.phoneNumber.invalid">
+          <div *ngIf="userForm.controls.phoneNumber.errors.required">
+            Ingresa un numero de telefono
+          </div>
+          <div *ngIf="userForm.controls.phoneNumber.errors.pattern">
+            Ingresa solo numeros
+          </div>
+          <div *ngIf="userForm.controls.phoneNumber.errors.minlength">
+            Cantidad minima de caracteres: 8
+          </div>
+          <div *ngIf="userForm.controls.phoneNumber.errors.maxlength">
+            Cantidad maxima de caracteres: 11
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label class="labels" for="inputEmail4">Direccion</label>
+        <input type="email" formControlName="address" class="form-control">
+        <div class="alert alert-danger" *ngIf="userForm.controls.phoneNumber.touched && userForm.controls.phoneNumber.invalid">
+          <div *ngIf="userForm.controls.address.errors.required">
+            Ingresa una direccion
+          </div>
+          <div *ngIf="userForm.controls.address.errors.minlength">
+            Cantidad minima de caracteres: 10
+          </div>
+          <div *ngIf="userForm.controls.address.errors.maxlength">
+            Cantidad maxima de caracteres: 70
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <button type="button" class="btn-cancel" (click)="cancel()">Cancelar</button>
+      </div>
+      <div class="form-group col-md-6">
+        <button type="submit" [disabled]="!userForm.valid" class="btn-save">Guardar</button>
+      </div>
+    </div>
+  
+  </form>
+</div>
